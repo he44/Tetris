@@ -1,0 +1,30 @@
+gcc -g -std=c99 -Wall  -c main.c 
+gcc -g -std=c99 -Wall  -c game_board.c
+gcc -g -std=c99 -Wall  -c inout.c `sdl2-config --cflags` `sdl2-config --libs`
+clang: warning: -lSDL2: 'linker' input unused [-Wunused-command-line-argument]
+clang: warning: argument unused during compilation: '-L/usr/local/lib' [-Wunused-command-line-argument]
+gcc -g -std=c99 -Wall  main.o game_board.o inout.o -o tetris
+Undefined symbols for architecture x86_64:
+  "_SDL_CreateWindow", referenced from:
+      _main in main.o
+  "_SDL_Delay", referenced from:
+      _main in main.o
+  "_SDL_DestroyWindow", referenced from:
+      _main in main.o
+  "_SDL_FillRect", referenced from:
+      _main in main.o
+  "_SDL_GetError", referenced from:
+      _main in main.o
+  "_SDL_GetWindowSurface", referenced from:
+      _main in main.o
+  "_SDL_Init", referenced from:
+      _main in main.o
+  "_SDL_MapRGB", referenced from:
+      _main in main.o
+  "_SDL_Quit", referenced from:
+      _main in main.o
+  "_SDL_UpdateWindowSurface", referenced from:
+      _main in main.o
+ld: symbol(s) not found for architecture x86_64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+make: *** [tetris] Error 1

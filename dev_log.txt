@@ -1,0 +1,28 @@
+/*--------------------------*/
+/*	05-15	00:00	Log 00	*/
+/*--------------------------*/
+
+I am officially going from SDL to SFML. It takes days for me trying to 
+figure out how to install SDL, how to link it with my program and how to write
+it into my Makefile.
+And I failed...
+
+/*--------------------------*/
+/*	05-15	00:36	Log 01	*/
+/*--------------------------*/
+
+I looked at the SFML website. Downloaded the package. They don't really have a 
+MacOS set up instructions without XCode.
+
+So I brew install the sfml package. Then I went to the web page for Linux build 
+and copied the cpp code and compiled as it instructed. 
+
+And it worked pretty well. Okay, so two major decisions:
+
+1.) I am learning SFML and forgetting about SDL right now
+
+2.)	I am going to start reviewing C++ and build my "Tetris" project in C++ 
+
+	instead of C
+
+https://www.sfml-dev.org/tutorials/2.4/start-linux.php

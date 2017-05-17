@@ -1,23 +1,35 @@
-CC=gcc
-CFLAGS=-g -std=c99 -Wall #-Werror
+CC=g++
+CFLAGS=-std=c++1y -stdlib=libc++ -g -O0 $(WARNINGS) -MMD -MP
 
-all: tetris
+all:	tetris
 
-# mp10: main.o sparsemat.o
-# 	$(CC) $(CFLAGS) main.o sparsemat.o cmp_mat.o -o mp10
+tetris:	main.o window.o
+	$(CC) main.o window.o -o tetris -lsfml-graphics -lsfml-window -lsfml-system
 
-tetris: main.o game_board.o
-	$(CC) $(CFLAGS) main.o game_board.o -o tetris
+main.o:	main.cpp
+	$(CC) -c main.cpp
 
-main.o: main.c
-	$(CC) $(CFLAGS) -c main.c
-
-# sparsemat.o: sparsemat.c
-# 	$(CC) $(CFLAGS) -c sparsemat.c
-
-game_board.o: game_board.c
-	$(CC) $(CFLAGS) -c game_board.c
-
+window.o: window.cpp
+	$(CC) -c window.cpp
 
 clean:
-	rm -f game_board.o main.o tetris
+	rm -f window.o main.o tetris	
+
+
+# all: tetris
+
+# tetris: main.o game_board.o video.o
+# 	$(CC) $(CFLAGS) main.o game_board.o video.o -o tetris 
+
+# main.o: main.c
+# 	$(CC) $(CFLAGS) -c main.c `sdl2-config --cflags --lib`
+
+# game_board.o: game_board.c
+# 	$(CC) $(CFLAGS) -c game_board.c
+
+# video.o: video.c
+# 	$(CC) $(CFLAGS) -c video.c 
+
+
+# clean:
+# 	rm -f video.o game_board.o main.o tetris
