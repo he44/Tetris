@@ -45,10 +45,40 @@ int open_window()
 {
     /*  Window module is not in charge of drawing contents  */
     sf::RenderWindow window;
-    window.create(sf::VideoMode(800, 600), "My Window");
+    window.create(sf::VideoMode(1000, 800), "My Window");
 
     sf::CircleShape shape(300.f);
     shape.setFillColor(sf::Color::Blue);
+    
+    /*  this loads the texture and sprite with the logo.png
+        from the directory
+        The size is 300*200
+        And we want to set the position to (700, 0), top right corner
+    */
+    sf::Texture logo_t;
+    sf::Sprite  logo_s;
+    if(! logo_t.loadFromFile("./resource/logo.png")){
+        cout << "Failed to load logo image" << endl;
+    }
+    logo_s.setTexture(logo_t);
+    logo_s.setPosition(sf::Vector2f(700, 0));
+
+    /*  Loading the font into the program
+    */
+    sf::Font font_consolas;
+    if(! font_consolas.loadFromFile("./resource/Consolas.ttf")){
+        cout << "Failed to load Consolas font" << endl;
+    }
+
+    /*  Setting up the text to display with name and introduction
+    */
+    sf::Text text_intro;
+    text_intro.setFont(font_consolas);
+    text_intro.setString("Developed by Yuchen He\n       2017-05");
+    text_intro.setCharacterSize(24);
+    text_intro.setFillColor(sf::Color::Red);
+    text_intro.setPosition(sf::Vector2f(700, 250));
+    
     /*  
         Main Loop / Game Loop
         a loop that ensures the app will be refersed until
@@ -81,12 +111,14 @@ int open_window()
                             shape.setFillColor(color[flag]);
                             flag ++;
                             if(flag >= 3){flag = 0;}
+                            window.clear();
                             window.draw(shape);
                             window.display();
                         }
                         else{
                             cout << "no " << endl;
-                            window.clear();
+                            window.clear(sf::Color::White);
+                            window.display();
                         }
                     }
                     break;
@@ -96,6 +128,11 @@ int open_window()
                     break;
             }
 
+            /*  Draw the logo and intro text   */
+            window.clear();
+            window.draw(logo_s);
+            window.draw(text_intro);
+            window.display();
         }
     }
     return 0;
