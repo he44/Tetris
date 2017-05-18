@@ -3,9 +3,9 @@
 	documentation and tutorials
 */
 
-/*==================*/
-/*	Notes on Events	*/
-/*==================*/
+/*============================================================================*/
+/*								Notes on Events								  */
+/*============================================================================*/
 /*
 1. 	sf::Event is a union --> only one of its members can be true at a time
 2.	sf::Event are filled by pollEvent/waitEvent
@@ -334,8 +334,9 @@ Mouse button codes are defined in the sf::Mouse::Button enum
 	}
 */
 
-
-
+/*===================*/
+/*	Bouding Boxes    */
+/*===================*/
 
 
 

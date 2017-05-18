@@ -70,11 +70,11 @@ int open_window()
         cout << "Failed to load Consolas font" << endl;
     }
 
-    /*  Setting up the text to display with name and introduction
+    /*  Setting up the text to display with name and date
     */
     sf::Text text_intro;
     text_intro.setFont(font_consolas);
-    text_intro.setString("Developed by Yuchen He\n       2017-05");
+    text_intro.setString("Developed by Yuchen He\n       2017-06");
     text_intro.setCharacterSize(24);
     text_intro.setFillColor(sf::Color::Red);
     text_intro.setPosition(sf::Vector2f(700, 250));
