@@ -1,5 +1,5 @@
 /*--------------------------*/
-/*	05-15	00:00	Log 00	*/
+	05-15	00:00	Log 00	
 /*--------------------------*/
 
 I am officially going from SDL to SFML. It takes days for me trying to 
@@ -8,7 +8,7 @@ it into my Makefile.
 And I failed...
 
 /*--------------------------*/
-/*	05-15	00:36	Log 01	*/
+	05-15	00:36	Log 01	
 /*--------------------------*/
 
 I looked at the SFML website. Downloaded the package. They don't really have a 
@@ -28,7 +28,7 @@ And it worked pretty well. Okay, so two major decisions:
 https://www.sfml-dev.org/tutorials/2.4/start-linux.php
 
 /*--------------------------*/
-/*	05-17	16:17	Log 02	*/
+	05-17	16:17	Log 02	
 /*--------------------------*/
 
 I read through the first few documentation and had a basic idea on how to set up
@@ -39,7 +39,7 @@ I also got basic info on how to interpret events and global devices.
 I pushed once to github. And now I am starting to read about drawing 2D stuff.
 
 /*--------------------------*/
-/*	05-17	21:30	Log 03	*/
+	05-17	21:30	Log 03	
 /*--------------------------*/
 
 I read through the portion for sprites and all the stuff.
@@ -47,7 +47,7 @@ I read through the portion for sprites and all the stuff.
 And now I can get the tetris logo into the window.
 
 /*--------------------------*/
-/*	05-17	22:38	Log 04	*/
+	05-17	22:38	Log 04	
 /*--------------------------*/
 
 I read through the text and fonts version. Now I am able to put my name and date on the side.

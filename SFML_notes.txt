@@ -4,7 +4,7 @@
 */
 
 /*============================================================================*/
-/*								Notes on Events								  */
+//	Notes on Events
 /*============================================================================*/
 /*
 1. 	sf::Event is a union --> only one of its members can be true at a time
@@ -35,9 +35,9 @@
 //     }
 // }
 
-/*===============*/
-/*	Event Types  */
-/*===============*/
+/*============================================================================*/
+//	Event Types
+/*============================================================================*/
 /*
 =================	window	=================
 1.	Closed event 
@@ -113,9 +113,10 @@
 =================	Joy Stick	=================	
 
 */
-/*======================*/
-/*	Keyboard Devices	*/
-/*======================*/
+
+/*============================================================================*/
+//	Keyboard Devices
+/*============================================================================*/
 /*	
 =================	Notice	=================
 Real-time input allows you to query the global state of keyboard, mouse and 
@@ -141,10 +142,9 @@ if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
 Mouse button codes are defined in the sf::Mouse::Button enum
 */
 
-
-/*===============*/
-/*	2D Drawing   */
-/*===============*/
+/*============================================================================*/
+//	2D Drawing
+/*============================================================================*/
 /*	
 1.	Basic:
 	SFML provides a graphics module which will help you draw 2D entities in a much simpler way than with OpenGL;
@@ -195,9 +195,9 @@ Mouse button codes are defined in the sf::Mouse::Button enum
 	-	NO need to activate the window in the rendering thread, SFML does it automatically for you whenever it needs to be done
 */
 
-/*===================*/
-/*	Sprite Texture   */
-/*===================*/
+/*============================================================================*/
+//	Sprite Texture
+/*============================================================================*/
 /*
 1.	Basic:
 	texture: image to be mapped to a 2-D entity
@@ -275,9 +275,9 @@ Mouse button codes are defined in the sf::Mouse::Button enum
 	Changing the current texture is an expensive operation for the graphics card. Drawing many sprites that use the same texture will yield the best performance.
 */
 
-/*===================*/
-/*	Text and Fonts   */
-/*===================*/
+/*============================================================================*/
+//	Text and Fonts
+/*============================================================================*/
 /*
 1.	loading a font
 
@@ -312,9 +312,9 @@ Mouse button codes are defined in the sf::Mouse::Button enum
 3.	The position and all the stuff can be set in the same way as sprite and other stuff
 */
 
-/*===================*/
-/*	Bouding Boxes    */
-/*===================*/
+/*============================================================================*/
+//	Bouding Boxes
+/*============================================================================*/
 /*
 	// get the bounding box of the entity
 	sf::FloatRect boundingBox = entity.getGlobalBounds();
@@ -334,9 +334,9 @@ Mouse button codes are defined in the sf::Mouse::Button enum
 	}
 */
 
-/*===================*/
-/*	Bouding Boxes    */
-/*===================*/
+/*============================================================================*/
+//	Shapes
+/*============================================================================*/
 
 
 
