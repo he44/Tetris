@@ -338,14 +338,65 @@ Mouse button codes are defined in the sf::Mouse::Button enum
 //	Shapes
 /*============================================================================*/
 
+/*
+1.	Shape Properties
+	-	Transformation(Same to all SFML graphical classes)
+	-	Color
+		changed by setFillColor(sf::Color(r, g, b));
+		or setFillColor(sf::Color::Blue);
+	-	Outline
+		shape.setOutlineThickness();
+		positive number: going outward
+		negative number: going inward
+		0: no outline
+		shape.setOutlineColor();
+		sf::Color::Transparent
+	-	Texture
+		shape.setTexture(&texture);	
+		I probably will just use regular color for the first phase of my game
+		Texture is modulate with filled color, set filled color to white to avoid modifying texture
+	-	Draw
+		window.draw(shape)
+2.	Built-in Shape Types
+	-	sf::RectangleShape  rec(sf::Vector2f(120,50));	//120*50 rectangle defined
+		rec.setSize(sf::Vector2f(100, 100));	//resize
+	-	sf::CircleShape
+		can be used to represent both circles and polygons
 
+		sf::CircleShape(radius, sides)
+		sides = 3, a triangle with all sides = radius
+		sides = 4, a square(not horizontally) 
+		sides = 8, an octagon
 
+		to draw a more "perfect" circle, make "sides" larger
+	-	sf::ConvexShape convex
+		// create an empty shape
+		sf::ConvexShape convex;
 
+		// resize it to 5 points
+		convex.setPointCount(5);
 
+		// define the points
+		convex.setPoint(0, sf::Vector2f(0, 0));
+		convex.setPoint(1, sf::Vector2f(150, 10));
+		convex.setPoint(2, sf::Vector2f(120, 90));
+		convex.setPoint(3, sf::Vector2f(30, 100));
+		convex.setPoint(4, sf::Vector2f(0, 50));
 
+		The points must be defined ALL either in clockwise or counter-clockwise order
+	-	Line:
+		either a rectangle 
+		or an array of vertex
+		sf::Vertex line[] =
+		{
+		    sf::Vertex(sf::Vector2f(10, 10)),
+		    sf::Vertex(sf::Vector2f(150, 150))
+		};
 
-
-
-
-
+		window.draw(line, 2, sf::Lines);
+	-	Custom Shape Types:
+		class customShape : public sf::Shape
+		{
+		
+		}
 

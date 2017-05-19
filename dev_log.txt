@@ -55,3 +55,11 @@ I read through the text and fonts version. Now I am able to put my name and date
 Also created a file called resource with the logo.png and Consolas.ttf
 
 Push once here
+
+/*--------------------------*/
+	05-19	00:34	Log 05	
+/*--------------------------*/
+
+I did more coding on Game class and focused on drawing/storing the game board information in the game object.
+
+Now we will be able to see a nicely game board in our window.(I added a screen shot)
