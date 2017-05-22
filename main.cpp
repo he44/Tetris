@@ -1,9 +1,9 @@
 #include "window.h"
 #include "game.h"
+#include "piece.h"
 
 int main()
 {
-	//window_trial();
 
 	Game main_game(BOARD_WIDTH, BOARD_HEIGHT);
 	cout << "Game created " << endl;
@@ -46,12 +46,28 @@ int main()
     text_intro.setFillColor(sf::Color::Red);
     text_intro.setPosition(sf::Vector2f(700, 250));
     
+    /*  Setting up the variables for time   */
+    sf::Time elapsed;
+    sf::Int64 usec;
+    float elapsed_second;
+    sf::Clock clock;
     /*  
         Main Loop / Game Loop
         a loop that ensures the app will be refersed until
         window is closed
     */
     while (window.isOpen()){
+        /*  checking timing condition here  */
+        // the following code is able to provide an "almost 1-second" periodic 
+        // interrupt
+        if (clock.getElapsedTime().asSeconds() >= (float)1){
+            cout << "1 second passed " << clock.getElapsedTime().asSeconds() << endl;
+            uni_active_piece->active_piece_fall();
+            clock.restart();
+        }
+
+
+
         /*  
             Checking Any Event  
             pollEvent returns true if any event occurs

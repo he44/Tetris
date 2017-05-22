@@ -3,8 +3,8 @@ CFLAGS=-std=c++1y -stdlib=libc++ -g -O0 $(WARNINGS) -MMD -MP
 
 all:	tetris
 
-tetris:	main.o window.o game.o
-	$(CC) main.o window.o game.o -o tetris -lsfml-graphics -lsfml-window -lsfml-system
+tetris:	main.o window.o game.o piece.o
+	$(CC) main.o window.o game.o piece.o -o tetris -lsfml-graphics -lsfml-window -lsfml-system
 
 main.o:	main.cpp
 	$(CC) -c main.cpp
@@ -15,8 +15,11 @@ window.o: window.cpp
 game.o: game.cpp
 	$(CC) -c game.cpp
 
+piece.o: piece.cpp
+	$(CC) -c piece.cpp
+
 clean:
-	rm -f game.o window.o main.o tetris	
+	rm -f piece.o game.o window.o main.o tetris	
 
 
 # all: tetris

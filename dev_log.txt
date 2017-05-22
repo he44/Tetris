@@ -63,3 +63,33 @@ Push once here
 I did more coding on Game class and focused on drawing/storing the game board information in the game object.
 
 Now we will be able to see a nicely game board in our window.(I added a screen shot)
+
+/*--------------------------*/
+	05-21	01:31	Log 06	
+/*--------------------------*/
+
+On the airplane, wrote the basic scratch for the piece class. 
+
+Now trying to figure out how to get periodic timing event going on so that the Piece can actually fall down.
+
+/*--------------------------*/
+	05-22	16:09(Beijing)	Log 07	
+/*--------------------------*/
+
+First update since I got back home. I think I coded the part to recive a 1 second timing interrupt. 
+
+I printed out the time elapsed as in seconds. And I think I am satisfied with timing like this.
+
+1 second passed 1.00002
+1 second passed 1.00001
+1 second passed 1.00003
+1 second passed 1
+1 second passed 1.00001
+1 second passed 1.00001
+1 second passed 1.00001
+1 second passed 1.00001
+1 second passed 1.00001
+1 second passed 1.00001
+1 second passed 1.00003
+
+
