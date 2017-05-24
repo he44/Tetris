@@ -10,6 +10,7 @@ Game::Game()
 {
 	width = 0;
 	height = 0;
+	bool_board = NULL;
 	board = NULL;
 	status = 0;
 }
@@ -27,11 +28,13 @@ Game::Game(int32_t width_arg, int32_t height_arg)
 		cout << "width is " << width << endl;
 		cout << "height is " << height << endl;
 		cout << "Invalid Board Dimension" << endl;
+		return;
 	}
 	this->width = width_arg;
 	this->height = height_arg;
-	this->board = new sf::RectangleShape[width_arg*height_arg];		
-	this->status = 0;
+	this->bool_board = new int8_t[width_arg * height_arg];
+	this->board = new sf::RectangleShape[width_arg * height_arg];		
+	this->status = 1;
 	/*	fill in all "cell" with default properties	*/
 	int i = 0;
 	int pos_x = 0;
@@ -41,10 +44,12 @@ Game::Game(int32_t width_arg, int32_t height_arg)
 			i = row * width_arg + col;
 			pos_x = board_start_x + col * size_cell;
 			pos_y = board_start_y + row * size_cell;
+			//	the cell is not occupied yet
+			(this->bool_board)[i] = 0;
 			//	resize the rectangle to single square "cell"	
 			(this->board)[i].setSize(sf::Vector2f(size_cell,size_cell));			
 			//	set the fill color to blue(just to see if it works)
-			(this->board)[i].setFillColor(sf::Color::Blue);
+			(this->board)[i].setFillColor(sf::Color(135, 206, 235));
 			//	set the location of the shape 
 			(this->board)[i].setPosition(sf::Vector2f(pos_x, pos_y));
 			//	set the outline of the shape
@@ -91,7 +96,35 @@ Game const & Game::operator=(Game const & other)
 	}
 	return *this;
 }
-		
+
+/*	is_LockDown
+	INPUT:	x -- pointer to four x_coordinate values of active piece
+			y -- pointer to four y_coordinate values of active piece
+	OUTPUT:	1 -- the piece cannot soft-drop/move anymore
+			-> should generate new active piece
+			0 -- the piece can still soft-drop/move
+			-> should continue dropping this piece
+	EFFECT:	This function is called inside the is_LockDown function from
+			piece class. In the main loop, this function is called at every 
+			periodic interrupt, before "dropping" the active piece
+*/
+int Game::is_LockDown(int* x, int* y)
+{
+	int ret = 0;
+	for(int i = 0; i < CELL_PP; ++i){
+		ret |= bool_board[x[i] + (y[i]+1) * BOARD_WIDTH];
+	} 
+	return ret;
+}
+
+void Game::lockDown(int* x, int* y, sf::RectangleShape* cells)
+{
+	for(int i = 0; i < CELL_PP; ++i){
+		bool_board[x[i] + y[i] * BOARD_WIDTH] = 1;
+		board[x[i] + y[i] * BOARD_WIDTH] = cells[i];
+	}
+}
+
 /*	draw_board
 	INPUT:	cur_window	-- pointer to the window where we want to draw 
 	OUTPUT:	NONE
@@ -118,10 +151,14 @@ void Game::copy(Game const & other)
 	width = other.width;
 	height = other.height;
 	status = other.status;
-	board = new sf::RectangleShape[width*height];
+	bool_board = new int8_t[width * height];
+	board = new sf::RectangleShape[width * height];
+	
 	for (int r = 0; r < height; r++){
 		for (int c = 0; c < width; c++){
-			board[r*width + c] = (other.board)[r*width + c];		}
+			bool_board[r * width + c] = (other.bool_board)[r * width + c];
+			board[r * width + c] = (other.board)[r * width + c];		
+		}
 	}
 }
 
@@ -134,6 +171,7 @@ void Game::clear()
 {
 	width = 0;
 	height = 0;
+	delete [] bool_board;
 	delete [] board;
 	status = 0;
 }

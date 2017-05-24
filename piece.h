@@ -3,11 +3,12 @@
 
 #include "window.h"
 #include "types.h"
-
-// number of cells per piece is always 4
-#define CELL_PP 4
+#include "game.h"
 
 
+extern int default_x[PIECE_TYPE][CELL_PP];
+extern int default_y[PIECE_TYPE][CELL_PP];
+extern sf::Color default_color[PIECE_TYPE];
 
 class Piece
 {
@@ -17,21 +18,24 @@ public:
 	/*	Copy Constructor */
 	Piece(Piece const & other);
 	/*	Constuctor with the shape and rotation constant	*/
-	Piece(int8_t shape_arg, int8_t rotation_arg);
+	Piece(int8_t shape_arg);
 	/*	assignment operator	*/
 	Piece const & operator=(Piece const & other);
 	/*	Destructor	*/
 	~Piece();
-
-	void active_piece_fall();
-	void active_piece_draw();
+	/*	Functions related to Game Process	*/
+	void soft_drop();
+	int is_LockDown(Game* game);
+	void lockDown(Game* game);
+	/*	Functions related to Video mem	*/
+	void draw_piece(sf::RenderWindow* cur_window);
 
 private:
 	int8_t shape;
 	int8_t rotation;
 	sf::RectangleShape* cells;
-	uint8_t* x_coord;
-	uint8_t* y_coord;
+	int* x_coord;
+	int* y_coord;
 
 	void clear();
 	void copy(Piece const & other);

@@ -4,23 +4,25 @@
 
 int main()
 {
-
+    /*  Constructs the game object with pre-defined dimensions.
+        The game board will be of 10 in width and 20 in height
+    */
 	Game main_game(BOARD_WIDTH, BOARD_HEIGHT);
-	cout << "Game created " << endl;
-	cout << "size of shape rectangle is " << sizeof(sf::RectangleShape) << endl;
 
-	/*  Window module is not in charge of drawing contents  */
+    /*  Constructs the active piece
+    */
+    Piece act_piece(5);
+    Piece temp;
+    /*  Constructs the window for the game with pre-defined dimensions.
+        The window will be of 1000 in width and 800 in height
+    */
     sf::RenderWindow window;
     window.create(sf::VideoMode(WINDOW_WIDTH_X, WINDOW_HEIGHT_Y), 
     			  "Tetris by Yuchen He");
-
-    // sf::CircleShape shape(300.f);
-    // shape.setFillColor(sf::Color::Blue);
     
-    /*  this loads the texture and sprite with the logo.png
-        from the directory
-        The size is 300*200
-        And we want to set the position to (700, 0), top right corner
+    /*  
+        Loads the logo sprite/texture from resource directory.
+        The size is 300*200 and it starts at location (700,0), right corner
     */
     sf::Texture logo_t;
     sf::Sprite  logo_s;
@@ -30,7 +32,7 @@ int main()
     logo_s.setTexture(logo_t);
     logo_s.setPosition(sf::Vector2f(700, 0));
 
-    /*  Loading the font into the program
+    /*  Loads the font into program to print out my name
     */
     sf::Font font_consolas;
     if(! font_consolas.loadFromFile("./resource/Consolas.ttf")){
@@ -47,10 +49,10 @@ int main()
     text_intro.setPosition(sf::Vector2f(700, 250));
     
     /*  Setting up the variables for time   */
-    sf::Time elapsed;
-    sf::Int64 usec;
-    float elapsed_second;
+
     sf::Clock clock;
+
+    int flag = 0;
     /*  
         Main Loop / Game Loop
         a loop that ensures the app will be refersed until
@@ -62,7 +64,15 @@ int main()
         // interrupt
         if (clock.getElapsedTime().asSeconds() >= (float)1){
             cout << "1 second passed " << clock.getElapsedTime().asSeconds() << endl;
-            uni_active_piece->active_piece_fall();
+            if(act_piece.is_LockDown(&main_game)){
+                // lock down active piece and generate a new one
+                act_piece.lockDown(&main_game);
+                flag = 1 - flag;
+                act_piece = Piece(flag);
+            } else {
+                act_piece.soft_drop();
+            }
+            //act_piece.draw_piece(&window);
             clock.restart();
         }
 
@@ -84,7 +94,7 @@ int main()
                 case sf::Event::Closed:
                     window.close();
                     break;
-                case sf::Event::TextEntered:
+                // case sf::Event::TextEntered:
                     // if (event.text.unicode< 128){
                     //     cout << "key pressed is " << 
                     //     (char)(event.text.unicode) << endl;
@@ -110,14 +120,15 @@ int main()
                 default:
                     break;
             }
-
-            /*  Draw the logo and intro text   */
-            window.clear();
-            window.draw(logo_s);
-            window.draw(text_intro);
-            main_game.draw_board(&window);
-            window.display();
         }
+        /*  Drawing sectoin: logo, text, game board and active piece  */
+        window.clear(); //clear the buffer
+        window.draw(logo_s);
+        window.draw(text_intro);
+        main_game.draw_board(&window);
+        act_piece.draw_piece(&window);
+        window.display();   //copy the buffer to video mem
+        
     }
 
 	return 0;

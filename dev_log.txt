@@ -92,4 +92,27 @@ I printed out the time elapsed as in seconds. And I think I am satisfied with ti
 1 second passed 1.00001
 1 second passed 1.00003
 
+/*--------------------------*/
+	05-24	13:45(Beijing)	Log 08	
+/*--------------------------*/
+
+Now I got the "soft drop" to work partially. I have not enforced the boundary checking and leaving the piece on game board yet. 
+
+The good thing is, now I can make a yellow O-shape piece or a cayon I-shape piece dropping at the pace of 1/s
+
+I am not connected to wifi right now, so I won't push. I will now try to enforce the boundary(bottom) checking and make sure locked piece will stay on the game board.
+
+DEBUG:	one bug I noticed is that the piece won't change location in the window every second even if the printed out coordinate values actually changed. 
+
+The solution to this bug is to move the "window.draw" section outside of the event-checking while loop and put it at the end of main loop instead.
+
+/*--------------------------*/
+	05-24	16:07(Beijing)	Log 09	
+/*--------------------------*/
+
+Finished writing the function is_LockDown() and lockDown() for both Piece class and Game class.
+
+Now the game is able to alternate between O-shape and I-shape piece and fall on each other.
+
+Maybe I should start writing a easy function generating a random piece every time the current piece is locked down.
 
