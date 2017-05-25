@@ -19,6 +19,7 @@ typedef unsigned short uint16_t;
 //typedef char int8_t;
 typedef unsigned char uint8_t;
 
+
 /*	in terms of cells	*/
 #define BOARD_WIDTH 10
 #define BOARD_HEIGHT 20
