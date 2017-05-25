@@ -116,3 +116,12 @@ Now the game is able to alternate between O-shape and I-shape piece and fall on 
 
 Maybe I should start writing a easy function generating a random piece every time the current piece is locked down.
 
+/*--------------------------*/
+	05-25	11:11(Beijing)	Log 10	
+/*--------------------------*/
+
+I think I got a roughly random function to generate the pieces. But it seems that the first one will always be red. 
+
+And I am thinking whether there is a way to fix that.
+
+I will push once here.

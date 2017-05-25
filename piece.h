@@ -4,7 +4,8 @@
 #include "window.h"
 #include "types.h"
 #include "game.h"
-
+#include <time.h>
+#include <stdlib.h>
 
 extern int default_x[PIECE_TYPE][CELL_PP];
 extern int default_y[PIECE_TYPE][CELL_PP];

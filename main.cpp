@@ -11,8 +11,10 @@ int main()
 
     /*  Constructs the active piece
     */
-    Piece act_piece(5);
-    Piece temp;
+    // Piece act_piece(0);
+    srand(time(NULL));
+    Piece act_piece(rand()%PIECE_TYPE);
+
     /*  Constructs the window for the game with pre-defined dimensions.
         The window will be of 1000 in width and 800 in height
     */
@@ -67,12 +69,14 @@ int main()
             if(act_piece.is_LockDown(&main_game)){
                 // lock down active piece and generate a new one
                 act_piece.lockDown(&main_game);
-                flag = 1 - flag;
-                act_piece = Piece(flag);
+                // flag++;
+                // if(flag >= 7){flag = 0;}
+                // act_piece = Piece(flag);
+                // srand(time(NULL));
+                act_piece = Piece(rand()%PIECE_TYPE);
             } else {
                 act_piece.soft_drop();
             }
-            //act_piece.draw_piece(&window);
             clock.restart();
         }
 

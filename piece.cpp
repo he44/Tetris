@@ -59,6 +59,7 @@ Piece::Piece(Piece const & other)
 
 /*	Constructor with parameter
 	INPUT:	shape_arg -- denoting the shape of the new piece
+			0~6 is assigned to seven different shapes
 	OUTPUT:
 	EFFECT:
 */
