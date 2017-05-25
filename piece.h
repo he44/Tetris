@@ -28,6 +28,8 @@ public:
 	void soft_drop();
 	int is_LockDown(Game* game);
 	void lockDown(Game* game);
+	void moveLeft();
+	void moveRight();
 	/*	Functions related to Video mem	*/
 	void draw_piece(sf::RenderWindow* cur_window);
 

@@ -51,7 +51,6 @@ int main()
     text_intro.setPosition(sf::Vector2f(700, 250));
     
     /*  Setting up the variables for time   */
-
     sf::Clock clock;
 
     int flag = 0;
@@ -65,7 +64,7 @@ int main()
         // the following code is able to provide an "almost 1-second" periodic 
         // interrupt
         if (clock.getElapsedTime().asSeconds() >= (float)1){
-            cout << "1 second passed " << clock.getElapsedTime().asSeconds() << endl;
+            //cout << "1 second passed " << clock.getElapsedTime().asSeconds() << endl;
             if(act_piece.is_LockDown(&main_game)){
                 // lock down active piece and generate a new one
                 act_piece.lockDown(&main_game);
@@ -79,8 +78,6 @@ int main()
             }
             clock.restart();
         }
-
-
 
         /*  
             Checking Any Event  
@@ -102,25 +99,17 @@ int main()
                     // if (event.text.unicode< 128){
                     //     cout << "key pressed is " << 
                     //     (char)(event.text.unicode) << endl;
-                    //     if (event.text.unicode == 119 ||
-                    //         event.text.unicode == 87){
-                    //         cout << "yes " << endl;
-                    //         shape.setFillColor(color[flag]);
-                    //         flag ++;
-                    //         if(flag >= 3){flag = 0;}
-                    //         window.clear();
-                    //         window.draw(shape);
-                    //         window.display();
-                    //     }
-                    //     else{
-                    //         cout << "no " << endl;
-                    //         window.clear(sf::Color::White);
-                    //         window.display();
-                    //     }
                     // }
                     // break;
-                //case sf::Event:KeyPressed:
-
+                case sf::Event::KeyPressed:
+                    if (event.key.code == sf::Keyboard::Left){
+                        cout << "left key press detected " << endl;
+                        act_piece.moveLeft();
+                    } else if (event.key.code == sf::Keyboard::Right) {
+                        cout << "right key press detected " << endl;
+                        act_piece.moveRight();
+                    }
+                    break;
                 default:
                     break;
             }

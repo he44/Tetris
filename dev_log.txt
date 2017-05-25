@@ -125,3 +125,17 @@ I think I got a roughly random function to generate the pieces. But it seems tha
 And I am thinking whether there is a way to fix that.
 
 I will push once here.
+
+/*--------------------------*/
+	05-25	12:43(Beijing)	Log 11	
+/*--------------------------*/
+
+I added two functions moveLeft() and moveRight() in Piece class.
+
+I also added event detecting KeyPressed in main loop, event section.
+
+Now I am able to move pieces left and right. It looks good.
+
+And continuous key press also looks good. Next step I will try to do the hard_drop function. This will make "playing" much faster.
+
+Push Once.

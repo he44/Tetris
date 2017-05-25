@@ -193,7 +193,38 @@ void Piece::lockDown(Game* game)
 
 }
 
-/*	active_piece_draw
+/*	moveLeft
+	INPUT:	NONE
+	OUTPUT:	NONE
+	EFFECT:	
+*/
+void Piece::moveLeft()
+{
+	if (x_coord[0] == 0 || x_coord[1] == 0 ||
+		x_coord[2] == 0 || x_coord[3] == 0){return;}
+	int pos_x, pos_y;
+	for(int i = 0; i < CELL_PP; ++i){
+		(x_coord[i])--;
+		pos_x = board_start_x + x_coord[i] * size_cell;
+		pos_y = board_start_y + y_coord[i] * size_cell;
+		cells[i].setPosition(sf::Vector2f(pos_x, pos_y));
+	}
+}
+
+void Piece::moveRight()
+{
+	if (x_coord[0] == BOARD_WIDTH-1 || x_coord[1] == BOARD_WIDTH-1 ||
+		x_coord[2] == BOARD_WIDTH-1 || x_coord[3] == BOARD_WIDTH-1){return;}
+	int pos_x, pos_y;
+	for(int i = 0; i < CELL_PP; ++i){
+		(x_coord[i])++;
+		pos_x = board_start_x + x_coord[i] * size_cell;
+		pos_y = board_start_y + y_coord[i] * size_cell;
+		cells[i].setPosition(sf::Vector2f(pos_x, pos_y));
+	}
+}
+
+/*	draw_piece
 	INPUT:	NONE
 	OUTPUT:	NONE
 	EFFECT:	This function should be called in the "drawing" section of the main
