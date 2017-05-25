@@ -118,9 +118,14 @@ int Game::is_LockDown(int* x, int* y)
 }
 
 /*	lockDown
-	INPUT:	x -- pointer
-	OUTPUT:
-	EFFECT:
+	INPUT:	x -- pointer to four x_coordinate values of active piece
+			y -- pointer to four y_coordinate values of active piece
+	OUTPUT:	NONE
+	EFFECT:	This function will add the active piece to the current game_board.
+			From the player, a new active piece should appear from the top and 
+			the old one should not be allowed to move.
+			From my code, the old active piece will be drawn within main_game
+			instead of act_piece.
 */
 void Game::lockDown(int* x, int* y, sf::RectangleShape* cells)
 {
@@ -146,8 +151,6 @@ void Game::clearLine()
 	}
 }
 
-
-
 /*	draw_board
 	INPUT:	cur_window	-- pointer to the window where we want to draw 
 	OUTPUT:	NONE
@@ -161,7 +164,6 @@ void Game::draw_board(sf::RenderWindow* cur_window)
 		cur_window->draw(this->board[i]);
 	}
 }
-
 
 /*	copy	private helper function
 	INPUT:	other -- reference to another Game object

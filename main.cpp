@@ -4,15 +4,15 @@
 
 int main()
 {
+    /*  Enables "random" number generation  */
+    srand(time(NULL));
+
     /*  Constructs the game object with pre-defined dimensions.
         The game board will be of 10 in width and 20 in height
     */
 	Game main_game(BOARD_WIDTH, BOARD_HEIGHT);
 
-    /*  Constructs the active piece
-    */
-    // Piece act_piece(0);
-    srand(time(NULL));
+    /*  Constructs the active piece */
     Piece act_piece(rand()%PIECE_TYPE);
 
     /*  Constructs the window for the game with pre-defined dimensions.
@@ -53,7 +53,6 @@ int main()
     /*  Setting up the variables for time   */
     sf::Clock clock;
 
-    int flag = 0;
     /*  
         Main Loop / Game Loop
         a loop that ensures the app will be refersed until
@@ -62,30 +61,37 @@ int main()
     while (window.isOpen()){
         /*  checking timing condition here  */
         // the following code is able to provide an "almost 1-second" periodic 
-        // interrupt
+        // interrupt(it's actually very close, we can print out the time 
+        // elpsed to see)
         if (clock.getElapsedTime().asSeconds() >= (float)1){
             //cout << "1 second passed " << clock.getElapsedTime().asSeconds() << endl;
-            
+
+            /*  if current piece is in locking_down position, lock it 
+                (although i believe that piece is actually already locked by the 
+                else branch here)
+                then we should check for clearline and actually clear them
+            */
             if(act_piece.is_LockDown(&main_game)){
                 /*  lock down active piece  */
                 act_piece.lockDown(&main_game);
                 /*  Check possibility of line clear */
                 main_game.clearLine();
-                // flag++;
-                // if(flag >= 7){flag = 0;}
-                // act_piece = Piece(flag);
-                // srand(time(NULL));
                 act_piece = Piece(rand()%PIECE_TYPE);
-            } else {
+            } 
+            /*  if current piece is not in locking_down position, drop it by one
+                cell.
+                If it is in locking_down position after dropping, we lock it. 
+                (This makes sure user cannot move the piece when they see it
+                in place)
+            */
+            else {
                 act_piece.soft_drop();
                 if(act_piece.is_LockDown(&main_game)){
                     act_piece.lockDown(&main_game);
                 }
             }
 
-            //act_piece.soft_drop(&main_game);
-
-            clock.restart();
+            clock.restart();    //restart the clock for next 1-second
         }
 
         /*  
@@ -104,12 +110,6 @@ int main()
                 case sf::Event::Closed:
                     window.close();
                     break;
-                // case sf::Event::TextEntered:
-                    // if (event.text.unicode< 128){
-                    //     cout << "key pressed is " << 
-                    //     (char)(event.text.unicode) << endl;
-                    // }
-                    // break;
                 case sf::Event::KeyPressed:
                     if (event.key.code == sf::Keyboard::Left){
                         //cout << "left key press detected " << endl;

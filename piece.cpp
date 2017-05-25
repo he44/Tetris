@@ -1,5 +1,10 @@
 #include "piece.h"
 
+/*	default_x, default_y
+	These two arrays contain coordinates for the "newly generated" piece.
+	Namely, these two arrays tell the location of each new piece.
+	These two arrays are sorted first by PIECE_TYPE, and then by each cell
+*/
 int default_x[7][4] = 
 {
 	{4, 5, 4, 5}, 
@@ -22,6 +27,16 @@ int default_y[7][4] =
 	{0, 0, 1, 1}
 };
 
+/*	default_color
+	This array contains the color associated with each shape of piece:
+	O_Shape yellow
+	I_Shape cyan
+	T_Shape purple
+	L_Shape orange
+	J_Shape blue
+	S_Shape lime	
+	Z_Shape	red
+*/
 sf::Color default_color[PIECE_TYPE] = 
 {
 	sf::Color::Yellow, sf::Color::Cyan, sf::Color(128,0,128), 
@@ -113,14 +128,15 @@ Piece const & Piece::operator=(Piece const & other)
 /*	Destructor
 	INPUT:	NONE
 	OUTPUT:	NONE
-	EFFECT:	
+	EFFECT:	This function will destory a Piece object by calling the private
+	helper function: clear()
 */
 Piece::~Piece()
 {
 	clear();
 }	
 
-/*	active_soft_drop
+/*	soft_drop
 	INPUT:	NONE
 	OUTPUT:	NONE
 	EFFECT:	This function should be called at every periodic interrupt of the 
@@ -136,11 +152,16 @@ void Piece::soft_drop()
 		pos_y = board_start_y + y_coord[i] * size_cell;
 		cells[i].setPosition(sf::Vector2f(pos_x, pos_y));
 	}
-	// if(this->is_LockDown(game)){
-	// 	this->lockDown(game);
-	// }
 }
 
+/*	hard_drop
+	INPUT:	game -- pointer to the current game object
+	OUTPUT:	NONE
+	EFFECT:	This function should be called when "space" is pressed. 
+			It directly moves the active piece to the farthest position possible
+			Thus, it's just like doing many soft_drop in a much faster tempo
+			Also, this function should lockDown the active piece in the end. 
+*/
 void Piece::hard_drop(Game* game)
 {
 	while (! this->is_LockDown(game)){
@@ -225,6 +246,11 @@ void Piece::moveLeft()
 	}
 }
 
+/*	moveRight
+	INPUT:
+	OUTPUT:
+	EFFECT:
+*/
 void Piece::moveRight()
 {
 	if (this->locked){return;}
@@ -253,6 +279,11 @@ void Piece::draw_piece(sf::RenderWindow* cur_window)
 	}
 }
 
+/*	clear()	
+	INPUT:	NONE
+	OUTPUT:	NONE
+	EFFECT:	clearing all related field of this Piece object
+*/
 void Piece::clear()
 {
 	locked = 0;
@@ -266,6 +297,12 @@ void Piece::clear()
 	y_coord = NULL;
 }
 
+/*	copy	
+	INPUT:	other -- reference to another Piece object
+	OUTPUT:	NONE
+	EFFECT:	Assign everything from another Piece object to this Piece
+			object
+*/
 void Piece::copy(Piece const & other)
 {
 	locked = other.locked;

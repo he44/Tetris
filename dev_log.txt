@@ -165,3 +165,8 @@ Before this two loops, "event" is checked and key press can be detected and will
 Updated solution: -> get rid of the original soft_drop method in main loop. Do lock checking and locking in soft_drop() function.
 
 --> actual solution is rather simple, based on origianl if statement, check after we did the soft drop. If it's locked, we lock it.
+
+
+--> Pushed once. Need to fix moveLeft() and moveRight()
+
+

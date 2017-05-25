@@ -20,16 +20,17 @@ typedef unsigned short uint16_t;
 typedef unsigned char uint8_t;
 
 
-/*	in terms of cells	*/
-#define BOARD_WIDTH 10
+/*	Constants related to game board	*/
+#define BOARD_WIDTH 10	//number of cells on game_board
 #define BOARD_HEIGHT 20
-/*	in terms of pixels	*/
-#define size_cell 35
-#define board_start_x 50
+
+#define size_cell 35	//number of pixel on one side of the cell
+#define board_start_x 50	//starting pixel index of the game board
 #define board_start_y 50
-// number of cells per piece is always 4
-#define CELL_PP 4
-#define PIECE_TYPE 7
+
+/*	Constants related to piece	*/
+#define CELL_PP 4	// number of cells per piece is always 4
+#define PIECE_TYPE 7	//there are 7 different shapes for a piece
 #define O_Shape 0	//yellow
 #define	I_Shape 1	//cyan
 #define T_Shape 2	//purple
