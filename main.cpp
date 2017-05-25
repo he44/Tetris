@@ -65,9 +65,12 @@ int main()
         // interrupt
         if (clock.getElapsedTime().asSeconds() >= (float)1){
             //cout << "1 second passed " << clock.getElapsedTime().asSeconds() << endl;
+            
             if(act_piece.is_LockDown(&main_game)){
-                // lock down active piece and generate a new one
+                /*  lock down active piece  */
                 act_piece.lockDown(&main_game);
+                /*  Check possibility of line clear */
+                main_game.clearLine();
                 // flag++;
                 // if(flag >= 7){flag = 0;}
                 // act_piece = Piece(flag);
@@ -75,7 +78,13 @@ int main()
                 act_piece = Piece(rand()%PIECE_TYPE);
             } else {
                 act_piece.soft_drop();
+                if(act_piece.is_LockDown(&main_game)){
+                    act_piece.lockDown(&main_game);
+                }
             }
+
+            //act_piece.soft_drop(&main_game);
+
             clock.restart();
         }
 
@@ -103,11 +112,13 @@ int main()
                     // break;
                 case sf::Event::KeyPressed:
                     if (event.key.code == sf::Keyboard::Left){
-                        cout << "left key press detected " << endl;
+                        //cout << "left key press detected " << endl;
                         act_piece.moveLeft();
-                    } else if (event.key.code == sf::Keyboard::Right) {
-                        cout << "right key press detected " << endl;
+                    } else if (event.key.code == sf::Keyboard::Right){
+                        //cout << "right key press detected " << endl;
                         act_piece.moveRight();
+                    } else if (event.key.code == sf::Keyboard::Space){
+                        act_piece.hard_drop(&main_game);
                     }
                     break;
                 default:

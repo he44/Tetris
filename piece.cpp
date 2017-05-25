@@ -38,6 +38,7 @@ sf::Color default_color[PIECE_TYPE] =
 */
 Piece::Piece()
 {                
+	locked = 0;
 	shape = -1;
 	rotation = -1;
 	cells = NULL;
@@ -69,6 +70,7 @@ Piece::Piece(int8_t shape_arg)
 		cout << "Invalid shape_arg " << endl;
 		return;
 	}
+	locked = 0;
 	shape = shape_arg;
 	rotation = 0;
 	cells = new sf::RectangleShape[CELL_PP];
@@ -134,6 +136,17 @@ void Piece::soft_drop()
 		pos_y = board_start_y + y_coord[i] * size_cell;
 		cells[i].setPosition(sf::Vector2f(pos_x, pos_y));
 	}
+	// if(this->is_LockDown(game)){
+	// 	this->lockDown(game);
+	// }
+}
+
+void Piece::hard_drop(Game* game)
+{
+	while (! this->is_LockDown(game)){
+		this->soft_drop();	
+	}
+	this->lockDown(game);
 }
 
 /*	is_LockDown
@@ -188,7 +201,7 @@ void Piece::lockDown(Game* game)
 	 	cur_y[i] = this->y_coord[i];
 	 	minos[i] = this->cells[i];
 	}
-
+	this->locked = 1;
 	game->lockDown(cur_x, cur_y, minos);
 
 }
@@ -200,6 +213,7 @@ void Piece::lockDown(Game* game)
 */
 void Piece::moveLeft()
 {
+	if (this->locked){return;}
 	if (x_coord[0] == 0 || x_coord[1] == 0 ||
 		x_coord[2] == 0 || x_coord[3] == 0){return;}
 	int pos_x, pos_y;
@@ -213,6 +227,7 @@ void Piece::moveLeft()
 
 void Piece::moveRight()
 {
+	if (this->locked){return;}
 	if (x_coord[0] == BOARD_WIDTH-1 || x_coord[1] == BOARD_WIDTH-1 ||
 		x_coord[2] == BOARD_WIDTH-1 || x_coord[3] == BOARD_WIDTH-1){return;}
 	int pos_x, pos_y;
@@ -240,6 +255,7 @@ void Piece::draw_piece(sf::RenderWindow* cur_window)
 
 void Piece::clear()
 {
+	locked = 0;
 	shape = -1;
 	rotation = -1;
 	delete [] cells;
@@ -252,6 +268,7 @@ void Piece::clear()
 
 void Piece::copy(Piece const & other)
 {
+	locked = other.locked;
 	shape = other.shape;
 	rotation = other.rotation;
 	cells = new sf::RectangleShape[CELL_PP];

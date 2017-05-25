@@ -117,6 +117,11 @@ int Game::is_LockDown(int* x, int* y)
 	return ret;
 }
 
+/*	lockDown
+	INPUT:	x -- pointer
+	OUTPUT:
+	EFFECT:
+*/
 void Game::lockDown(int* x, int* y, sf::RectangleShape* cells)
 {
 	for(int i = 0; i < CELL_PP; ++i){
@@ -124,6 +129,24 @@ void Game::lockDown(int* x, int* y, sf::RectangleShape* cells)
 		board[x[i] + y[i] * BOARD_WIDTH] = cells[i];
 	}
 }
+
+/*	clearLine
+	INPUT:	NONE
+	OUTPUT:	NONE
+	EFFECT:
+*/
+void Game::clearLine()
+{
+	int r, c;	//row, col index
+	for(r = BOARD_HEIGHT; r >= 0; --r){
+		/*	Check bool_board to see whether occupied	*/
+		for(c = 0; c < BOARD_WIDTH; ++c){
+			return;	
+		}
+	}
+}
+
+
 
 /*	draw_board
 	INPUT:	cur_window	-- pointer to the window where we want to draw 

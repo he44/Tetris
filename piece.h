@@ -26,6 +26,7 @@ public:
 	~Piece();
 	/*	Functions related to Game Process	*/
 	void soft_drop();
+	void hard_drop(Game* game);
 	int is_LockDown(Game* game);
 	void lockDown(Game* game);
 	void moveLeft();
@@ -34,6 +35,7 @@ public:
 	void draw_piece(sf::RenderWindow* cur_window);
 
 private:
+	int8_t locked;
 	int8_t shape;
 	int8_t rotation;
 	sf::RectangleShape* cells;

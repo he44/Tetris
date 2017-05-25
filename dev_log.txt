@@ -139,3 +139,29 @@ Now I am able to move pieces left and right. It looks good.
 And continuous key press also looks good. Next step I will try to do the hard_drop function. This will make "playing" much faster.
 
 Push Once.
+
+/*--------------------------*/
+	05-25	18:12(Beijing)	Log 12	
+/*--------------------------*/
+
+I added the hard_drop function. It merely wraps up is_LockDown() and soft_drop(). 
+
+One bug I noticed is that if I press left/right immediately after the piece is in place, it is still able to move.
+
+Another bug i also realized is that currently I allowed piece to move onto each other horizontally --> I did not check gameboard when I am doing moveLeft or moveRight function.
+
+Solution:
+1.) add a field in Piece object, saying "locked". If it's locked. it should not move at all.
+
+2.) Passing in game pointer for moveLeft and moveRight
+
+Update:
+item 1 above won't solve the "locked block still move" issue. 
+
+I believe the reason is that, currently, my piece will stop at the "last available location", and then go to next while loop for is_LockDown to return 1 and then lock the piece.
+
+Before this two loops, "event" is checked and key press can be detected and will do something.
+
+Updated solution: -> get rid of the original soft_drop method in main loop. Do lock checking and locking in soft_drop() function.
+
+--> actual solution is rather simple, based on origianl if statement, check after we did the soft drop. If it's locked, we lock it.

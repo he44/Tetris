@@ -21,10 +21,10 @@ class Game
 
 		/*	Draw the board on SFML window	*/
 		void draw_board(sf::RenderWindow* cur_window);
-
+		/*	Functions for Game Process	*/
 		int is_LockDown(int* x, int* y);
 		void lockDown(int* x, int* y, sf::RectangleShape* cells);
-
+		void clearLine();
 	private:
 		/*	Private Fields	*/
 		int32_t width;	//width of game board in terms of cells
