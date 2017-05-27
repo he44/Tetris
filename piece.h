@@ -29,8 +29,8 @@ public:
 	void hard_drop(Game* game);
 	int is_LockDown(Game* game);
 	void lockDown(Game* game);
-	void moveLeft();
-	void moveRight();
+	void moveLeft(Game* game);
+	void moveRight(Game* game);
 	/*	Functions related to Video mem	*/
 	void draw_piece(sf::RenderWindow* cur_window);
 

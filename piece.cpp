@@ -232,13 +232,20 @@ void Piece::lockDown(Game* game)
 	OUTPUT:	NONE
 	EFFECT:	
 */
-void Piece::moveLeft()
+void Piece::moveLeft(Game* game)
 {
+	if (game == NULL){return;}
+	//don't move locked piece
 	if (this->locked){return;}
+	//check left boundary of the game board	
 	if (x_coord[0] == 0 || x_coord[1] == 0 ||
 		x_coord[2] == 0 || x_coord[3] == 0){return;}
+	//check the game board	
+	if (game->is_LeftBound(x_coord, y_coord)){return;}
+	int i = 0;
 	int pos_x, pos_y;
-	for(int i = 0; i < CELL_PP; ++i){
+	//change the coordinate and move the piece
+	for(i = 0; i < CELL_PP; ++i){
 		(x_coord[i])--;
 		pos_x = board_start_x + x_coord[i] * size_cell;
 		pos_y = board_start_y + y_coord[i] * size_cell;
@@ -251,11 +258,14 @@ void Piece::moveLeft()
 	OUTPUT:
 	EFFECT:
 */
-void Piece::moveRight()
+void Piece::moveRight(Game* game)
 {
 	if (this->locked){return;}
 	if (x_coord[0] == BOARD_WIDTH-1 || x_coord[1] == BOARD_WIDTH-1 ||
 		x_coord[2] == BOARD_WIDTH-1 || x_coord[3] == BOARD_WIDTH-1){return;}
+	//check the game board	
+	if (game->is_RightBound(x_coord, y_coord)){return;}
+	int i = 0;
 	int pos_x, pos_y;
 	for(int i = 0; i < CELL_PP; ++i){
 		(x_coord[i])++;

@@ -97,6 +97,42 @@ Game const & Game::operator=(Game const & other)
 	return *this;
 }
 
+/*	is_LeftBound
+	INPUT:	x -- pointer to four x_coordinate values of active piece
+			y -- pointer to four y_coordinate values of active piece
+	OUTPUT:	0 -- the active piece cannot move toward left
+			1 -- the active piece can still move toward left
+	EFFECT:	This function returns wheter the active piece has blocking cells on
+			the left side.
+			It should be callled in Piece::moveLeft()
+*/
+int Game::is_LeftBound(int* x, int* y)
+{
+	int ret = 0;
+	for(int i = 0; i < CELL_PP; ++i){
+		ret |= bool_board[x[i] - 1 + y[i] * BOARD_WIDTH];
+	}
+	return ret;
+}
+
+/*	is_RightBound
+	INPUT:	x -- pointer to four x_coordinate values of active piece
+			y -- pointer to four y_coordinate values of active piece
+	OUTPUT:	0 -- the active piece cannot move toward right
+			1 -- the active piece can still move toward right
+	EFFECT:	This function returns wheter the active piece has blocking cells on
+			the right side.
+			It should be callled in Piece::moveRight()
+*/
+int Game::is_RightBound(int* x, int* y)
+{
+	int ret = 0;
+	for(int i = 0; i < CELL_PP; ++i){
+		ret |= bool_board[x[i] + 1 + y[i] * BOARD_WIDTH];
+	}
+	return ret;
+}
+
 /*	is_LockDown
 	INPUT:	x -- pointer to four x_coordinate values of active piece
 			y -- pointer to four y_coordinate values of active piece
@@ -142,14 +178,57 @@ void Game::lockDown(int* x, int* y, sf::RectangleShape* cells)
 */
 void Game::clearLine()
 {
+	cout << "in function " << endl;
 	int r, c;	//row, col index
+	int flag = 1;
 	for(r = BOARD_HEIGHT; r >= 0; --r){
+		flag = 1;
 		/*	Check bool_board to see whether occupied	*/
 		for(c = 0; c < BOARD_WIDTH; ++c){
-			return;	
+			if(bool_board[c + r * BOARD_WIDTH] == 0){
+				flag = 0;
+			}
+		}
+		if (flag == 1){
+			cout << "here " << endl;
+			this->clearLine_helper(r);
 		}
 	}
 }
+
+/*	clearLine_helper()
+	INPUT:	row -- the index of the row to be cleared
+	OUTPUT:	NONE
+	EFFECT:	This function should move all the cells above "row" downward by one
+			cell.
+*/
+void Game::clearLine_helper(int row)
+{
+	int r, c;
+	for(r = row; r >= 0; --r){
+		for(c = 0; c < BOARD_WIDTH; ++c){
+			if(r == 0){
+				//	default cell
+				board[c + r * BOARD_WIDTH].setFillColor(sf::Color(135, 206, 235));
+				bool_board[c + r * BOARD_WIDTH] = 0;
+			} else {
+				// cell from the line above
+				bool_board[c + r * BOARD_WIDTH] = bool_board[c + (r-1) * BOARD_WIDTH];
+				board[c + r * BOARD_WIDTH] = board[c + (r-1) * BOARD_WIDTH];
+				setPosition(r, c);
+				// board has to reset its location
+			}
+		}
+	}
+}
+
+void Game::setPosition(int r, int c)
+{
+	int pos_x = board_start_x + c * size_cell;
+	int pos_y = board_start_y + r * size_cell;
+	board[c + r * BOARD_WIDTH].setPosition(pos_x, pos_y);
+}
+
 
 /*	draw_board
 	INPUT:	cur_window	-- pointer to the window where we want to draw 

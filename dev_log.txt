@@ -169,4 +169,14 @@ Updated solution: -> get rid of the original soft_drop method in main loop. Do l
 
 --> Pushed once. Need to fix moveLeft() and moveRight()
 
+/*--------------------------*/
+	05-27	07:46(Beijing)	Log 13	
+/*--------------------------*/
 
+I modified moveLeft function and added is_LeftBound in Game class.
+
+By doing this I want to enable the player to move the piece immediately after they put it in "lock down" position while the game board has not locked it down yet.
+
+As for hard drop, I don't think enabling moving after in place is necessary.
+
+is_RightBound is added as well and comments are also added. It's 20:15 now.

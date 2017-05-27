@@ -86,9 +86,6 @@ int main()
             */
             else {
                 act_piece.soft_drop();
-                if(act_piece.is_LockDown(&main_game)){
-                    act_piece.lockDown(&main_game);
-                }
             }
 
             clock.restart();    //restart the clock for next 1-second
@@ -113,10 +110,10 @@ int main()
                 case sf::Event::KeyPressed:
                     if (event.key.code == sf::Keyboard::Left){
                         //cout << "left key press detected " << endl;
-                        act_piece.moveLeft();
+                        act_piece.moveLeft(&main_game);
                     } else if (event.key.code == sf::Keyboard::Right){
                         //cout << "right key press detected " << endl;
-                        act_piece.moveRight();
+                        act_piece.moveRight(&main_game);
                     } else if (event.key.code == sf::Keyboard::Space){
                         act_piece.hard_drop(&main_game);
                     }
