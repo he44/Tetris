@@ -22,6 +22,7 @@ class Game
 		/*	Draw the board on SFML window	*/
 		void draw_board(sf::RenderWindow* cur_window);
 		/*	Functions for Game Process	*/
+		int isOccupied(int* x, int* y);
 		int is_LeftBound(int* x, int* y);
 		int is_RightBound(int* x, int* y);
 		int is_LockDown(int* x, int* y);

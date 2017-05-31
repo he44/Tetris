@@ -7,9 +7,34 @@
 #include <time.h>
 #include <stdlib.h>
 
+//array to get color for each shape
+extern sf::Color default_color[PIECE_TYPE];	
+//arrays to get original(newly generated) position for each shape
 extern int default_x[PIECE_TYPE][CELL_PP];
 extern int default_y[PIECE_TYPE][CELL_PP];
-extern sf::Color default_color[PIECE_TYPE];
+//arrays to get offset for each shape of piece when doing rotation
+
+extern int O_x_offset[ROTATION_TYPE][CELL_PP];
+extern int O_y_offset[ROTATION_TYPE][CELL_PP];
+extern int I_x_offset[ROTATION_TYPE][CELL_PP];
+extern int I_y_offset[ROTATION_TYPE][CELL_PP];
+extern int T_x_offset[ROTATION_TYPE][CELL_PP];
+extern int T_y_offset[ROTATION_TYPE][CELL_PP];
+extern int L_x_offset[ROTATION_TYPE][CELL_PP];
+extern int L_y_offset[ROTATION_TYPE][CELL_PP];
+extern int J_x_offset[ROTATION_TYPE][CELL_PP];
+extern int J_y_offset[ROTATION_TYPE][CELL_PP];
+extern int S_x_offset[ROTATION_TYPE][CELL_PP];
+extern int S_y_offset[ROTATION_TYPE][CELL_PP];
+extern int Z_x_offset[ROTATION_TYPE][CELL_PP];
+extern int Z_y_offset[ROTATION_TYPE][CELL_PP];
+
+extern void* SRS_x_offset[PIECE_TYPE];
+extern void* SRS_y_offset[PIECE_TYPE];
+
+
+
+
 
 class Piece
 {
@@ -31,6 +56,7 @@ public:
 	void lockDown(Game* game);
 	void moveLeft(Game* game);
 	void moveRight(Game* game);
+	void rotate(Game* game);
 	/*	Functions related to Video mem	*/
 	void draw_piece(sf::RenderWindow* cur_window);
 

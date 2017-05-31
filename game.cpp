@@ -97,6 +97,28 @@ Game const & Game::operator=(Game const & other)
 	return *this;
 }
 
+/*	isOccupied
+	INTPUT:	x -- points to four x_coordinate values of act_piece after rotation
+			y -- points to four y_coordinate values of act_piece after rotation
+	OUTPUT:	0 -- those cells are not occupied yet on game_board --> rotatable
+			1 -- those cells are already occupied on game_board --> Nothing
+	EFFECT:	This function returns whether a rotation is possible to happen
+			It should be called in the Piece::rotate(Game* game) function before 
+			setting new coordinate values and cell positions
+*/
+int Game::isOccupied(int* x, int* y)
+{
+	int ret = 0;
+	for (int i = 0; i < CELL_PP; ++i){
+		if (x[i] < 0 || y[i] < 0 ||
+			x[i] > BOARD_WIDTH || y[i] > BOARD_HEIGHT)
+		{return 1;}
+		ret |= bool_board[x[i] + y[i] * BOARD_WIDTH];
+		if(ret){return ret;}
+	}
+	return ret;
+}
+
 /*	is_LeftBound
 	INPUT:	x -- pointer to four x_coordinate values of active piece
 			y -- pointer to four y_coordinate values of active piece
@@ -178,7 +200,6 @@ void Game::lockDown(int* x, int* y, sf::RectangleShape* cells)
 */
 void Game::clearLine()
 {
-	cout << "in function " << endl;
 	int r, c;	//row, col index
 	int flag = 1;
 	for(r = BOARD_HEIGHT; r >= 0; --r){
@@ -190,7 +211,6 @@ void Game::clearLine()
 			}
 		}
 		if (flag == 1){
-			cout << "here " << endl;
 			this->clearLine_helper(r);
 		}
 	}
@@ -222,6 +242,14 @@ void Game::clearLine_helper(int row)
 	}
 }
 
+/*	setPosition
+	INPUT:	r -- index of row on the game board
+			c -- index of column on the game board
+	OUTPUT:	NONE
+	EFFECT:	This funciton works as the bridge between game_board and each 
+			rectangle cell.
+			It sets the cell for (r,c) at the correct location in the window
+*/
 void Game::setPosition(int r, int c)
 {
 	int pos_x = board_start_x + c * size_cell;

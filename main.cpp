@@ -116,6 +116,8 @@ int main()
                         act_piece.moveRight(&main_game);
                     } else if (event.key.code == sf::Keyboard::Space){
                         act_piece.hard_drop(&main_game);
+                    } else if (event.key.code == sf::Keyboard::Up){
+                        act_piece.rotate(&main_game);
                     }
                     break;
                 default:

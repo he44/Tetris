@@ -27,6 +27,137 @@ int default_y[7][4] =
 	{0, 0, 1, 1}
 };
 
+/*	"shape"_x_offset[4][4], "shape"_y_offset[4][4]
+	These arrays store the offset values for all possible roataion of each shape
+	In the Piece::rotate(Gmae* game) function, a new pair of coordinate is 
+	acquired by adding the old pair with values from one of the following arrays
+
+	Notice:
+	1.) The rotation mechanism follows Tetris SRS rotation system
+	2.) Each piece have four rotation types(0~3), some of them might be the same
+	3.) The way I index each cell is from top to bottom, from left to right
+*/
+
+//	O_Shape won't rotate at all, so all entries are 0
+int O_x_offset[ROTATION_TYPE][CELL_PP] =
+{
+	{0, 0, 0, 0},
+	{0, 0, 0, 0},
+	{0, 0, 0, 0},
+	{0, 0, 0, 0}
+};
+
+int O_y_offset[ROTATION_TYPE][CELL_PP] =
+{
+	{0, 0, 0, 0},
+	{0, 0, 0, 0},
+	{0, 0, 0, 0},
+	{0, 0, 0, 0}
+};
+
+//	I_Shape 
+int I_x_offset[ROTATION_TYPE][CELL_PP] =
+{
+	{2, 1, 0, -1},
+	{-2, -1, 0, 1},
+	{1, 0, -1, -2},
+	{-1, 0, 1, 2}
+};
+
+int I_y_offset[ROTATION_TYPE][CELL_PP] =
+{
+	{-1, 0, 1, 2},
+	{2, 1, 0, -1},
+	{-2, -1, 0, 1},
+	{1, 0, -1, -2}
+};
+
+//	T_Shape
+int T_x_offset[ROTATION_TYPE][CELL_PP] =
+{
+	{0, 1, 1, -1},
+	{-1, 0, 0, 0},
+	{1, -1, -1, 0},
+	{0, 0, 0, 1}
+};
+
+int T_y_offset[ROTATION_TYPE][CELL_PP] =
+{
+	{0, 0, 0, 1},
+	{1, 0, 0, 0},
+	{-1, 0, 0, 0},
+	{0, 0, 0, -1}
+};
+
+//	L_Shape
+int L_x_offset[ROTATION_TYPE][CELL_PP] =
+{
+	{-1, 1, 0, 0},
+	{-1, 0, 1, -2},
+	{0, 0, -1, 1},
+	{2, -1, 0, 1}
+};
+
+int L_y_offset[ROTATION_TYPE][CELL_PP] =
+{
+	{0, 0, 1, 1},
+	{1, 0, -1, 0},
+	{-1, -1, 0, 0},
+	{0, 1, 0, -1}
+};
+
+//	J_Shape
+int J_x_offset[ROTATION_TYPE][CELL_PP] =
+{
+	{1, 2, 0, -1},
+	{-1, -1, 1, 1},
+	{1, 0, -2, -1},
+	{-1, -1, 1, 1}
+};
+
+int J_y_offset[ROTATION_TYPE][CELL_PP] =
+{
+	{0, -1, 0, 1},
+	{1, 1, 0, 0},
+	{-1, 0, 1, 0},
+	{0, 0, -1, -1}
+};
+
+//	S_Shape
+int S_x_offset[ROTATION_TYPE][CELL_PP] =
+{
+	{0, -1, 2, 1},
+	{0, 1, -2, -1},
+	{-1, -2, 1, 0},
+	{1, 2, -1, 0}
+};
+
+int S_y_offset[ROTATION_TYPE][CELL_PP] =
+{
+	{0, 1, 0, 1},
+	{1, 0, 1, 0},
+	{-1, 0, -1, 0},
+	{0, -1, 0, -1}
+};
+
+//	Z_Shape
+int Z_x_offset[ROTATION_TYPE][CELL_PP] =
+{
+	{2, 0, 1, -1},
+	{-2, 0, -1, 1},
+	{1, -1, 0, -2},
+	{-1, 1, 0, 2}
+};
+
+int Z_y_offset[ROTATION_TYPE][CELL_PP] =
+{
+	{0, 1, 0, 1},
+	{1, 0, 1, 0},
+	{-1, 0, -1, 0},
+	{0, -1, 0, -1}
+};
+
+
 /*	default_color
 	This array contains the color associated with each shape of piece:
 	O_Shape yellow
@@ -228,9 +359,12 @@ void Piece::lockDown(Game* game)
 }
 
 /*	moveLeft
-	INPUT:	NONE
+	INPUT:	game -- pointer to the current game object
 	OUTPUT:	NONE
-	EFFECT:	
+	EFFECT:	This function will move the active piece one cell to the left on 
+			every press of left key.
+			The game pointer is used to check whether there are occupied cells 
+			on the left of active piece.
 */
 void Piece::moveLeft(Game* game)
 {
@@ -254,9 +388,12 @@ void Piece::moveLeft(Game* game)
 }
 
 /*	moveRight
-	INPUT:
-	OUTPUT:
-	EFFECT:
+	INPUT:	game -- pointer to the current game object
+	OUTPUT:	NONE
+	EFFECT:	This function will move the active piece one cell to the right on 
+			every press of right key.
+			The game pointer is used to check whether there are occupied cells 
+			on the right of active piece.
 */
 void Piece::moveRight(Game* game)
 {
@@ -272,6 +409,76 @@ void Piece::moveRight(Game* game)
 		pos_x = board_start_x + x_coord[i] * size_cell;
 		pos_y = board_start_y + y_coord[i] * size_cell;
 		cells[i].setPosition(sf::Vector2f(pos_x, pos_y));
+	}
+}
+
+void Piece::rotate(Game* game)
+{
+    // cout << "rotation function should be invoked" << endl;
+    if(this->locked){return;}
+    int new_x[4], new_y[4];
+    int i;
+    // put the coordinates into new_x and new_y using the pre-defined offset 
+  	// array assuming that the rotation can take place
+    if (shape == O_Shape){
+		    for(i = 0; i < 4; i++){
+	    		new_x[i] = x_coord[i] + O_x_offset[rotation][i];
+	    		new_y[i] = y_coord[i] + O_y_offset[rotation][i];    	
+	    	}
+	    	// cout << "O shape" << endl;
+	} else if(shape == I_Shape){
+			for(i = 0; i < 4; i++){
+	    		new_x[i] = x_coord[i] + I_x_offset[rotation][i];
+	    		new_y[i] = y_coord[i] + I_y_offset[rotation][i];    	
+	    	}
+	    	// cout << "I shape" << endl;
+	} else if(shape == T_Shape){
+	    	for(i = 0; i < 4; i++){
+	    		new_x[i] = x_coord[i] + T_x_offset[rotation][i];
+	    		new_y[i] = y_coord[i] + T_y_offset[rotation][i];    	
+	    	}
+	    	// cout << "T shape" << endl;
+	} else if(shape == L_Shape){
+	    	for(i = 0; i < 4; i++){
+	    		new_x[i] = x_coord[i] + L_x_offset[rotation][i];
+	    		new_y[i] = y_coord[i] + L_y_offset[rotation][i];    	
+	    	}
+	    	// cout << "L shape" << endl;
+	} else if (shape == J_Shape){
+	    	for(i = 0; i < 4; i++){
+	    		new_x[i] = x_coord[i] + J_x_offset[rotation][i];
+	    		new_y[i] = y_coord[i] + J_y_offset[rotation][i];    	
+	    	}
+	    	// cout << "J shape" << endl;
+	} else if(shape == S_Shape){
+	    	for(i = 0; i < 4; i++){
+	    		new_x[i] = x_coord[i] + S_x_offset[rotation][i];
+	    		new_y[i] = y_coord[i] + S_y_offset[rotation][i];    	
+	    	}
+	    	// cout << "S shape" << endl;
+	} else if (shape == Z_Shape){
+	    	for(i = 0; i < 4; i++){
+	    		new_x[i] = x_coord[i] + Z_x_offset[rotation][i];
+	    		new_y[i] = y_coord[i] + Z_y_offset[rotation][i];    	
+	    	}
+	    	// cout << "Z shape" << endl;
+	}
+
+   	// check whether there is conflict using game pointer
+	if (game->isOccupied(new_x, new_y)){return;}// if not rotatable, do nothing
+	
+	// update rotation value
+	rotation ++;
+	if(rotation == 4){rotation = 0;}
+	// set the new coordinates, set new position of all rectangles	
+	for (i = 0; i < 4; ++i){
+		x_coord[i] = new_x[i];
+		y_coord[i] = new_y[i];
+		// cout << "before sfml function " << endl;
+		// cout << "x_coord[" << i << "] is " << x_coord[i] << " ";
+		// cout << "y_coord[" << i << "] is " << y_coord[i] << endl;
+		cells[i].setPosition(x_coord[i] * size_cell + board_start_x,
+    						 y_coord[i] * size_cell + board_start_y);
 	}
 }
 

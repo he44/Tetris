@@ -180,3 +180,33 @@ By doing this I want to enable the player to move the piece immediately after th
 As for hard drop, I don't think enabling moving after in place is necessary.
 
 is_RightBound is added as well and comments are also added. It's 20:15 now.
+
+/*--------------------------*/
+	05-31	13:49(Beijing)	Log 14	
+/*--------------------------*/
+
+I added detectiong for up arrow key, Piece::rotate(Game*) and Game::isOccupied(int*, int*).
+
+These two functions will perform the tasks needed to rotate a piece following SRS rotation system.
+
+It looks pretty good right now, all the pieces can perform rotation from 0 to 1. 
+
+I will add all the offsets later today and then push to github.
+
+Also about the "random generating mechanism", I think it kinda depends on the timing. That's why everytime the game starts, a T piece is generated.
+
+I will probably add a Starting Page later, and depending on how much time player stays in that page, the first piece might be different.
+
+I am also thinking about the necessity of keeping track of an array so that new pieces came as a combo of 7. (That is to say, from first new piece to 7th new piece, from 8th to 14th, ..., all 7 shapes show up exactly once)
+
+/*--------------------------*/
+	05-31	19:58(Beijing)	Log 15	
+/*--------------------------*/
+
+I finished all the rotation stuff. There might be one bug with my clearLine() function.
+
+I will check that later.
+
+Push.
+
+

@@ -31,6 +31,7 @@ typedef unsigned char uint8_t;
 /*	Constants related to piece	*/
 #define CELL_PP 4	// number of cells per piece is always 4
 #define PIECE_TYPE 7	//there are 7 different shapes for a piece
+#define ROTATION_TYPE 4	//there are 4 rotations for a piece(may be the same)
 #define O_Shape 0	//yellow
 #define	I_Shape 1	//cyan
 #define T_Shape 2	//purple
@@ -38,6 +39,10 @@ typedef unsigned char uint8_t;
 #define J_Shape 4	//blue
 #define S_Shape 5	//lime	
 #define Z_Shape	6	//red
+
+
+
+
 
 
 #endif /* ASM */
