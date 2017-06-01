@@ -1,3 +1,33 @@
+/*									
+ *
+ * piece.cpp - source file contatining Piece class pre-defined constanst and 
+ 			   function implementation
+ *
+ * "Copyright (c) 2017 by Yuchen He."
+ * Permission to use, copy, modify, and distribute this software and its
+ * documentation for any purpose, without fee, and without written agreement is
+ * hereby granted, provided that the above copyright notice and the following
+ * two paragraphs appear in all copies of this software.
+ * 
+ * IN NO EVENT SHALL THE AUTHOR BE LIABLE TO ANY PARTY FOR DIRECT, INDIRECT, 
+ * SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OF THIS 
+ * SOFTWARE AND ITS DOCUMENTATION, EVEN IF THE AUTHOR HAS BEEN ADVISED OF THE 
+ * POSSIBILITY OF SUCH DAMAGE.
+ * 
+ * THE AUTHOR SPECIFICALLY DISCLAIM ANY WARRANTIES, INCLUDING, BUT NOT LIMITED 
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
+ * PURPOSE.  THE SOFTWARE PROVIDED HEREUNDER IS ON AN "AS IS" BASIS, AND THE 
+ * AUTHOR HAS NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, 
+ * ENHANCEMENTS, OR MODIFICATIONS."
+ *
+ * Author:	    	Yuchen He
+ * Version:	    	1
+ * Creation Date:   2017-05-21
+ * Filename:	    piece.cpp
+ * History:
+ * Notice:			
+ */
+
 #include "piece.h"
 
 /*	default_x, default_y
@@ -412,6 +442,16 @@ void Piece::moveRight(Game* game)
 	}
 }
 
+/*	rotate(Game* game)
+	INPUT:	game -- pointer to the current game object 
+	OUTPUT:	NONE
+	EFFECT:	This function performs the rotation of the active piece.
+			It used 7(actuallly 14) pre-defined arrays to calculate the new 
+			coordinates of all four cells of the active piece.
+			It used the game pointer to check whether the cells at new positions
+			are already occupied. If so, this function will just return.
+			It also updates the rotation field in Piece object.
+*/
 void Piece::rotate(Game* game)
 {
     // cout << "rotation function should be invoked" << endl;
@@ -482,6 +522,16 @@ void Piece::rotate(Game* game)
 	}
 }
 
+/*	isOccupied(Game* game)
+	INPUT:	game -- pointer to the current game object 
+	OUTPUT:	0 -- the position of this piece is not occupied
+			1 -- the position of this piece is occupied
+	EFFECT:	This function checks whether this piece object should appear at 
+			that position.
+			It is called when a new act_piece is generated in main loop. If this
+			function returns true, it means the game cannot generate any new 
+			piece. --> The game ends.
+*/
 int Piece::isOccupied(Game* game)
 {
 	return game->isOccupied(x_coord, y_coord);

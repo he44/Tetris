@@ -226,4 +226,10 @@ Starting Page -> Game(My current main function) -> Game Over Page -> Exit
 	|						|___________________________|			  |
 	|_________________________________________________________________|
 
+/*--------------------------*/
+	06-01	22:20(Beijing)	Log 17	
+/*--------------------------*/
 
+I added comments and copy right information for each header/cpp file.
+
+I will push once here. 
