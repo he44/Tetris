@@ -209,4 +209,21 @@ I will check that later.
 
 Push.
 
+/*--------------------------*/
+	06-01	19:03(Beijing)	Log 16	
+/*--------------------------*/
+
+I added the code to check the "end of a game" in while loop, after a new piece is generated.
+
+Right now I asked the code to close the window and write "Game Over" in terminal.
+
+I might do something else later.
+
+My idea:
+
+Starting Page -> Game(My current main function) -> Game Over Page -> Exit
+	|						^							|			  ^
+	|						|___________________________|			  |
+	|_________________________________________________________________|
+
 

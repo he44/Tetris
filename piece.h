@@ -13,7 +13,6 @@ extern sf::Color default_color[PIECE_TYPE];
 extern int default_x[PIECE_TYPE][CELL_PP];
 extern int default_y[PIECE_TYPE][CELL_PP];
 //arrays to get offset for each shape of piece when doing rotation
-
 extern int O_x_offset[ROTATION_TYPE][CELL_PP];
 extern int O_y_offset[ROTATION_TYPE][CELL_PP];
 extern int I_x_offset[ROTATION_TYPE][CELL_PP];
@@ -28,10 +27,6 @@ extern int S_x_offset[ROTATION_TYPE][CELL_PP];
 extern int S_y_offset[ROTATION_TYPE][CELL_PP];
 extern int Z_x_offset[ROTATION_TYPE][CELL_PP];
 extern int Z_y_offset[ROTATION_TYPE][CELL_PP];
-
-extern void* SRS_x_offset[PIECE_TYPE];
-extern void* SRS_y_offset[PIECE_TYPE];
-
 
 
 
@@ -57,6 +52,8 @@ public:
 	void moveLeft(Game* game);
 	void moveRight(Game* game);
 	void rotate(Game* game);
+
+	int isOccupied(Game* game);
 	/*	Functions related to Video mem	*/
 	void draw_piece(sf::RenderWindow* cur_window);
 

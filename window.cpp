@@ -3,6 +3,14 @@
 
 static int flag = 0;
 static sf::Color color[3] = {sf::Color::Red, sf::Color::Green, sf::Color::Blue};
+
+
+int window_endPage()
+{
+    return 0;
+}
+
+
 /*  window_trial
     INPUT:  NONE
     OUTPUT: NONE

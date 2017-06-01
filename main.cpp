@@ -18,8 +18,8 @@ int main()
     /*  Constructs the window for the game with pre-defined dimensions.
         The window will be of 1000 in width and 800 in height
     */
-    sf::RenderWindow window;
-    window.create(sf::VideoMode(WINDOW_WIDTH_X, WINDOW_HEIGHT_Y), 
+    sf::RenderWindow* window = new sf::RenderWindow;
+    window->create(sf::VideoMode(WINDOW_WIDTH_X, WINDOW_HEIGHT_Y), 
     			  "Tetris by Yuchen He");
     
     /*  
@@ -58,7 +58,7 @@ int main()
         a loop that ensures the app will be refersed until
         window is closed
     */
-    while (window.isOpen()){
+    while (window->isOpen()){
         /*  checking timing condition here  */
         // the following code is able to provide an "almost 1-second" periodic 
         // interrupt(it's actually very close, we can print out the time 
@@ -77,6 +77,12 @@ int main()
                 /*  Check possibility of line clear */
                 main_game.clearLine();
                 act_piece = Piece(rand()%PIECE_TYPE);
+                /*  Check possibility of ending a game */
+                if(act_piece.isOccupied(&main_game)){
+                    // might do something else when game ends
+                    window->close();
+                    cout << "Game over" << endl;
+                }
             } 
             /*  if current piece is not in locking_down position, drop it by one
                 cell.
@@ -98,14 +104,14 @@ int main()
             where window is creaed
         */
         sf::Event event;
-        while (window.pollEvent(event)){
+        while (window->pollEvent(event)){
             /*  close the window if close event is detected 
                 Window will get closed, program terminated
             */
             //if (event.type == sf::Event::Closed){window.close();}
             switch (event.type){
                 case sf::Event::Closed:
-                    window.close();
+                    window->close();
                     break;
                 case sf::Event::KeyPressed:
                     if (event.key.code == sf::Keyboard::Left){
@@ -125,12 +131,12 @@ int main()
             }
         }
         /*  Drawing sectoin: logo, text, game board and active piece  */
-        window.clear(); //clear the buffer
-        window.draw(logo_s);
-        window.draw(text_intro);
-        main_game.draw_board(&window);
-        act_piece.draw_piece(&window);
-        window.display();   //copy the buffer to video mem
+        window->clear(); //clear the buffer
+        window->draw(logo_s);
+        window->draw(text_intro);
+        main_game.draw_board(window);
+        act_piece.draw_piece(window);
+        window->display();   //copy the buffer to video mem
         
     }
 

@@ -212,6 +212,7 @@ void Game::clearLine()
 		}
 		if (flag == 1){
 			this->clearLine_helper(r);
+			r++;
 		}
 	}
 }

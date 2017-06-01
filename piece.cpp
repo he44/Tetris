@@ -482,6 +482,13 @@ void Piece::rotate(Game* game)
 	}
 }
 
+int Piece::isOccupied(Game* game)
+{
+	return game->isOccupied(x_coord, y_coord);
+}
+
+
+
 /*	draw_piece
 	INPUT:	NONE
 	OUTPUT:	NONE

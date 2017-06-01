@@ -8,6 +8,7 @@
 #define _TYPES_H
 
 #ifndef ASM
+#include <SFML/Graphics.hpp>
 
 /* Types defined here just like in <stdint.h> */
 typedef int int32_t;
