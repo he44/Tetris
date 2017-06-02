@@ -291,4 +291,12 @@ video on my game and all the stuff. I will upload it to Youtube and maybe share
 it on facebook.
 
 
+/*--------------------------*/
+	06-02	21:00(Beijing)	Log 19	
+/*--------------------------*/
 
+The code and comments are all pushed to Github. The repository is also made public.
+
+I will start recording the video.
+
+Say hello to Tetris(0.0).
