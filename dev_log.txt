@@ -273,6 +273,8 @@ Here are some possible improvements I should think about:
 	   frequency)
 
 	-- 2-player mode
+	
+	-- scoring system
 
 5.)	Wrap all my stuff into a single file that can be run with double clicking
 	
