@@ -30,7 +30,7 @@
 #ifndef _PIECE_H
 #define _PIECE_H
 
-#include "window.h"
+// #include "window.h"
 #include "types.h"
 #include "game.h"
 #include <time.h>

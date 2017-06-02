@@ -42,6 +42,8 @@
 #define _TYPES_H
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
+using namespace std;
 
 /* Types defined here just like in <stdint.h> */
 typedef int int32_t;
@@ -53,7 +55,8 @@ typedef unsigned short uint16_t;
 //typedef char int8_t;
 typedef unsigned char uint8_t;
 
-
+#define WINDOW_HEIGHT_Y 800
+#define WINDOW_WIDTH_X 1000
 /*	Constants related to game board	*/
 #define BOARD_WIDTH 10	//number of cells on game_board
 #define BOARD_HEIGHT 20

@@ -233,3 +233,62 @@ Starting Page -> Game(My current main function) -> Game Over Page -> Exit
 I added comments and copy right information for each header/cpp file.
 
 I will push once here. 
+
+/*--------------------------*/
+	06-02	20:09(Beijing)	Log 18	
+/*--------------------------*/
+
+I added the functions to display a "starting page" as well as a "ending page".
+
+I enabled the user to restart the game in "ending page".
+
+I added comments in main.cpp, window.cpp.
+
+At this point, I think it's safe to say I cloned a playable Tetris game.
+
+Here are some possible improvements I should think about:
+
+1.) Make a Kyuhyun edition. Replacing or the color cells with pictures of this 
+	singer. (My GF is a huge fan, so that's my motivation)
+
+2.) Revise the random piece generation function. Right now I think if I keep 
+	press SPACE to hard_drop, the new piece will show in a certain noticable 
+	pattern.
+
+3.)	Make the overall color theme look better. Right now they look ugly somehow.
+	And I can also enable using "arrow key" and "enter" to alter between differnt
+	choices. Like this:
+
+	<End Page>:
+				_____________________
+			-->	|	Restart			 |
+				|____________________|
+
+				_____________________
+			-->	|	Quit		     |
+				|____________________|
+
+4.)	Make more game modes: 
+	-- let the user choose between differnt Difficulty Level (slow/fast dropping
+	   frequency)
+
+	-- 2-player mode
+
+5.)	Wrap all my stuff into a single file that can be run with double clicking
+	
+	Right now if I double click the compiled file "tetris", it will automatically
+	open up a terminal. And the program will fail to load all the images and fonts.
+
+	My guess is that when double clicking, my OS opens up terminal in the root
+	directory by default. And from there it cannot find my images and fonts with
+	the path I put in the code.
+......
+
+I will add a README.md file with insturctions on how to run the game from terminal.
+
+Then I will push it to Github and make it public. I will then record a short 
+video on my game and all the stuff. I will upload it to Youtube and maybe share
+it on facebook.
+
+
+
