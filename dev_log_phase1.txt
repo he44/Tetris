@@ -1,0 +1,305 @@
+/*--------------------------*/
+	05-15	00:00	Log 00	
+/*--------------------------*/
+
+I am officially going from SDL to SFML. It takes days for me trying to 
+figure out how to install SDL, how to link it with my program and how to write
+it into my Makefile.
+And I failed...
+
+/*--------------------------*/
+	05-15	00:36	Log 01	
+/*--------------------------*/
+
+I looked at the SFML website. Downloaded the package. They don't really have a 
+MacOS set up instructions without XCode.
+
+So I brew install the sfml package. Then I went to the web page for Linux build 
+and copied the cpp code and compiled as it instructed. 
+
+And it worked pretty well. Okay, so two major decisions:
+
+1.) I am learning SFML and forgetting about SDL right now
+
+2.)	I am going to start reviewing C++ and build my "Tetris" project in C++ 
+
+	instead of C
+
+https://www.sfml-dev.org/tutorials/2.4/start-linux.php
+
+/*--------------------------*/
+	05-17	16:17	Log 02	
+/*--------------------------*/
+
+I read through the first few documentation and had a basic idea on how to set up
+the window and use the main/game loop.
+
+I also got basic info on how to interpret events and global devices.
+
+I pushed once to github. And now I am starting to read about drawing 2D stuff.
+
+/*--------------------------*/
+	05-17	21:30	Log 03	
+/*--------------------------*/
+
+I read through the portion for sprites and all the stuff.
+
+And now I can get the tetris logo into the window.
+
+/*--------------------------*/
+	05-17	22:38	Log 04	
+/*--------------------------*/
+
+I read through the text and fonts version. Now I am able to put my name and date on the side.
+
+Also created a file called resource with the logo.png and Consolas.ttf
+
+Push once here
+
+/*--------------------------*/
+	05-19	00:34	Log 05	
+/*--------------------------*/
+
+I did more coding on Game class and focused on drawing/storing the game board information in the game object.
+
+Now we will be able to see a nicely game board in our window.(I added a screen shot)
+
+/*--------------------------*/
+	05-21	01:31	Log 06	
+/*--------------------------*/
+
+On the airplane, wrote the basic scratch for the piece class. 
+
+Now trying to figure out how to get periodic timing event going on so that the Piece can actually fall down.
+
+/*--------------------------*/
+	05-22	16:09(Beijing)	Log 07	
+/*--------------------------*/
+
+First update since I got back home. I think I coded the part to recive a 1 second timing interrupt. 
+
+I printed out the time elapsed as in seconds. And I think I am satisfied with timing like this.
+
+1 second passed 1.00002
+1 second passed 1.00001
+1 second passed 1.00003
+1 second passed 1
+1 second passed 1.00001
+1 second passed 1.00001
+1 second passed 1.00001
+1 second passed 1.00001
+1 second passed 1.00001
+1 second passed 1.00001
+1 second passed 1.00003
+
+/*--------------------------*/
+	05-24	13:45(Beijing)	Log 08	
+/*--------------------------*/
+
+Now I got the "soft drop" to work partially. I have not enforced the boundary checking and leaving the piece on game board yet. 
+
+The good thing is, now I can make a yellow O-shape piece or a cayon I-shape piece dropping at the pace of 1/s
+
+I am not connected to wifi right now, so I won't push. I will now try to enforce the boundary(bottom) checking and make sure locked piece will stay on the game board.
+
+DEBUG:	one bug I noticed is that the piece won't change location in the window every second even if the printed out coordinate values actually changed. 
+
+The solution to this bug is to move the "window.draw" section outside of the event-checking while loop and put it at the end of main loop instead.
+
+/*--------------------------*/
+	05-24	16:07(Beijing)	Log 09	
+/*--------------------------*/
+
+Finished writing the function is_LockDown() and lockDown() for both Piece class and Game class.
+
+Now the game is able to alternate between O-shape and I-shape piece and fall on each other.
+
+Maybe I should start writing a easy function generating a random piece every time the current piece is locked down.
+
+/*--------------------------*/
+	05-25	11:11(Beijing)	Log 10	
+/*--------------------------*/
+
+I think I got a roughly random function to generate the pieces. But it seems that the first one will always be red. 
+
+And I am thinking whether there is a way to fix that.
+
+I will push once here.
+
+/*--------------------------*/
+	05-25	12:43(Beijing)	Log 11	
+/*--------------------------*/
+
+I added two functions moveLeft() and moveRight() in Piece class.
+
+I also added event detecting KeyPressed in main loop, event section.
+
+Now I am able to move pieces left and right. It looks good.
+
+And continuous key press also looks good. Next step I will try to do the hard_drop function. This will make "playing" much faster.
+
+Push Once.
+
+/*--------------------------*/
+	05-25	18:12(Beijing)	Log 12	
+/*--------------------------*/
+
+I added the hard_drop function. It merely wraps up is_LockDown() and soft_drop(). 
+
+One bug I noticed is that if I press left/right immediately after the piece is in place, it is still able to move.
+
+Another bug i also realized is that currently I allowed piece to move onto each other horizontally --> I did not check gameboard when I am doing moveLeft or moveRight function.
+
+Solution:
+1.) add a field in Piece object, saying "locked". If it's locked. it should not move at all.
+
+2.) Passing in game pointer for moveLeft and moveRight
+
+Update:
+item 1 above won't solve the "locked block still move" issue. 
+
+I believe the reason is that, currently, my piece will stop at the "last available location", and then go to next while loop for is_LockDown to return 1 and then lock the piece.
+
+Before this two loops, "event" is checked and key press can be detected and will do something.
+
+Updated solution: -> get rid of the original soft_drop method in main loop. Do lock checking and locking in soft_drop() function.
+
+--> actual solution is rather simple, based on origianl if statement, check after we did the soft drop. If it's locked, we lock it.
+
+
+--> Pushed once. Need to fix moveLeft() and moveRight()
+
+/*--------------------------*/
+	05-27	07:46(Beijing)	Log 13	
+/*--------------------------*/
+
+I modified moveLeft function and added is_LeftBound in Game class.
+
+By doing this I want to enable the player to move the piece immediately after they put it in "lock down" position while the game board has not locked it down yet.
+
+As for hard drop, I don't think enabling moving after in place is necessary.
+
+is_RightBound is added as well and comments are also added. It's 20:15 now.
+
+/*--------------------------*/
+	05-31	13:49(Beijing)	Log 14	
+/*--------------------------*/
+
+I added detectiong for up arrow key, Piece::rotate(Game*) and Game::isOccupied(int*, int*).
+
+These two functions will perform the tasks needed to rotate a piece following SRS rotation system.
+
+It looks pretty good right now, all the pieces can perform rotation from 0 to 1. 
+
+I will add all the offsets later today and then push to github.
+
+Also about the "random generating mechanism", I think it kinda depends on the timing. That's why everytime the game starts, a T piece is generated.
+
+I will probably add a Starting Page later, and depending on how much time player stays in that page, the first piece might be different.
+
+I am also thinking about the necessity of keeping track of an array so that new pieces came as a combo of 7. (That is to say, from first new piece to 7th new piece, from 8th to 14th, ..., all 7 shapes show up exactly once)
+
+/*--------------------------*/
+	05-31	19:58(Beijing)	Log 15	
+/*--------------------------*/
+
+I finished all the rotation stuff. There might be one bug with my clearLine() function.
+
+I will check that later.
+
+Push.
+
+/*--------------------------*/
+	06-01	19:03(Beijing)	Log 16	
+/*--------------------------*/
+
+I added the code to check the "end of a game" in while loop, after a new piece is generated.
+
+Right now I asked the code to close the window and write "Game Over" in terminal.
+
+I might do something else later.
+
+My idea:
+
+Starting Page -> Game(My current main function) -> Game Over Page -> Exit
+	|						^							|			  ^
+	|						|___________________________|			  |
+	|_________________________________________________________________|
+
+/*--------------------------*/
+	06-01	22:20(Beijing)	Log 17	
+/*--------------------------*/
+
+I added comments and copy right information for each header/cpp file.
+
+I will push once here. 
+
+/*--------------------------*/
+	06-02	20:09(Beijing)	Log 18	
+/*--------------------------*/
+
+I added the functions to display a "starting page" as well as a "ending page".
+
+I enabled the user to restart the game in "ending page".
+
+I added comments in main.cpp, window.cpp.
+
+At this point, I think it's safe to say I cloned a playable Tetris game.
+
+Here are some possible improvements I should think about:
+
+1.) Make a Kyuhyun edition. Replacing or the color cells with pictures of this 
+	singer. (My GF is a huge fan, so that's my motivation)
+
+2.) Revise the random piece generation function. Right now I think if I keep 
+	press SPACE to hard_drop, the new piece will show in a certain noticable 
+	pattern.
+
+3.)	Make the overall color theme look better. Right now they look ugly somehow.
+	And I can also enable using "arrow key" and "enter" to alter between differnt
+	choices. Like this:
+
+	<End Page>:
+				_____________________
+			-->	|	Restart			 |
+				|____________________|
+
+				_____________________
+			-->	|	Quit		     |
+				|____________________|
+
+4.)	Make more game modes: 
+	-- let the user choose between differnt Difficulty Level (slow/fast dropping
+	   frequency)
+
+	-- 2-player mode
+	
+	-- scoring system
+
+5.)	Wrap all my stuff into a single file that can be run with double clicking
+	
+	Right now if I double click the compiled file "tetris", it will automatically
+	open up a terminal. And the program will fail to load all the images and fonts.
+
+	My guess is that when double clicking, my OS opens up terminal in the root
+	directory by default. And from there it cannot find my images and fonts with
+	the path I put in the code.
+......
+
+I will add a README.md file with insturctions on how to run the game from terminal.
+
+Then I will push it to Github and make it public. I will then record a short 
+video on my game and all the stuff. I will upload it to Youtube and maybe share
+it on facebook.
+
+
+/*--------------------------*/
+	06-02	21:00(Beijing)	Log 19	
+/*--------------------------*/
+
+The code and comments are all pushed to Github. The repository is also made public.
+
+I will start recording the video.
+
+Say hello to Tetris(0.0).
+

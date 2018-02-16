@@ -1,0 +1,15 @@
+#+TITLE: Development Log: Phase 2
+#+OPTIONS: toc:nil
+
+* Introduction
+  
+
+* Log
+
+*** 2018-02-15 18:01
+
+	- transferred the whole project inot Xcode IDE
+
+	- Fixed the library dependencies using tips from this video: https://www.youtube.com/watch?v=mtEiyDbYMxQ&t=261s
+
+	- Fixed the loading input file issue using tips from this video: https://www.youtube.com/watch?v=JM1D0yxAYHk&t=106s
