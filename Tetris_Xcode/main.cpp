@@ -33,7 +33,8 @@
 int main()
 {
     /*  Enables "random" number generation  */
-    srand(time(NULL));
+    srand( static_cast<unsigned int>(time(NULL)));
+//    srand(time(NULL));
     /*  flag for restarting the game    */
     int restart = 1;   
     /*  Constructs the window for the game with pre-defined dimensions.
@@ -52,7 +53,14 @@ int main()
     //then we get into game page
 
     while (restart){
-        tetrisGame(window); //the game process, returns when the game ends
+        //@RECHECK
+        //have to check the return value from tetrisGame:
+        //if the function is returned because of "closing the window"
+        //we won't want to execute inside this while loop
+        if (tetrisGame(window) == -1){
+            return 0;
+        }
+        //the game process, returns when the game ends
         restart = endPage(window);  //then we get into end page
                                     //endPage() returns either when use wants to
                                     //quit(restart = 0) or restart(restart = 1) 

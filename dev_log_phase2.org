@@ -46,3 +46,9 @@
 	  - better algorithms to generate new pieces
 
 	  - better UI?
+
+*** 2018-02-16 00:09
+
+	- Fixed the infinite loop when player wants to "x-out" the game
+
+	  - returning different values from tetrisGame() function

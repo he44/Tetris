@@ -212,8 +212,11 @@ int tetrisGame(sf::RenderWindow* window)
             //if (event.type == sf::Event::Closed){window.close();}
             switch (event.type){
                 case sf::Event::Closed:
+                    // @RECHECK
+                    // have to return a different value here,
+                    // in order to avoid for infinite loop in main.cpp
                     window->close();
-                    break;
+                    return -1;
                 case sf::Event::KeyPressed:
                     if (event.key.code == sf::Keyboard::Left){
                         //cout << "left key press detected " << endl;
@@ -240,7 +243,7 @@ int tetrisGame(sf::RenderWindow* window)
         window->display();   //copy the buffer to video mem
         
     }
-    return -1;
+    return 0;
 }
 
 

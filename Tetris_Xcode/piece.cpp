@@ -190,20 +190,29 @@ int Z_y_offset[ROTATION_TYPE][CELL_PP] =
 
 /*	default_color
 	This array contains the color associated with each shape of piece:
-	O_Shape yellow
-	I_Shape cyan
-	T_Shape purple
-	L_Shape orange
-	J_Shape blue
-	S_Shape lime	
-	Z_Shape	red
 */
-sf::Color default_color[PIECE_TYPE] = 
+sf::Color old_default_color[PIECE_TYPE] =
 {
-	sf::Color::Yellow, sf::Color::Cyan, sf::Color(128,0,128), 
-	sf::Color(255,165,0),  sf::Color::Blue, sf::Color(50,205,50), 
-	sf::Color::Red
+	sf::Color::Yellow, //O_Shape yellow
+    sf::Color::Cyan, //I_Shape cyan
+    sf::Color(128,0,128), //T_Shape purple
+	sf::Color(255,165,0), //L_Shape orange
+    sf::Color::Blue, //J_Shape blue
+    sf::Color(50,205,50), //S_Shape lime
+	sf::Color::Red //Z_Shape    red
 };
+
+sf::Color default_color[PIECE_TYPE] =
+{
+    sf::Color::Yellow,
+    sf::Color::Yellow,
+    sf::Color::Yellow,
+    sf::Color::Yellow,
+    sf::Color::Yellow,
+    sf::Color::Yellow,
+    sf::Color::Yellow
+};
+
 
 /*	Default Constructor
 	INPUT:	NONE
