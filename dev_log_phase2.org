@@ -1,8 +1,27 @@
 #+TITLE: Development Log: Phase 2
 #+OPTIONS: toc:nil
+#+STARTUP: showall
 
 * Introduction
   
+** Motivation:
+
+   I resumed this project mainly for two reasons:
+
+   1. I want to gain more experience working with C++ and multi-meida library
+
+	  - This semester I am doing most coding working in Python, and last night I realized how "lazy" I became after writing
+	  python code for about three weeks: forgetting the semicolon, forgetting the curly bracket, and even forgetting parentheses.
+      I want to learn Python and other languages with simpler syntax. But I definitely do not want to mess up my familarity with C++.
+	  
+	  - Besides syntax, I also want to dive deeper into the vast feautres and functionalities of C++. I want to master the level of "C with stl" and then go beyond that.
+
+   2. I want to get familiar with XCode
+
+	  - IDE seems important in real-life industry.
+
+	  - I want to learn about iOS development as well. So it makes sense for me to practice with XCode.
+
 
 * Log
 
@@ -13,3 +32,17 @@
 	- Fixed the library dependencies using tips from this video: https://www.youtube.com/watch?v=mtEiyDbYMxQ&t=261s
 
 	- Fixed the loading input file issue using tips from this video: https://www.youtube.com/watch?v=JM1D0yxAYHk&t=106s
+
+	- Added this log document
+
+	- More features I could add to this project:
+
+	  - sound
+
+	  - exit the game any time the player wants
+
+	  - score counting system / timer
+
+	  - better algorithms to generate new pieces
+
+	  - better UI?
