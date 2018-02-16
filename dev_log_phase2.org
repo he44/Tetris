@@ -10,11 +10,11 @@
 
    1. I want to gain more experience working with C++ and multi-meida library
 
-	  - This semester I am doing most coding working in Python, and last night I realized how "lazy" I became after writing
+	  This semester I am doing most coding working in Python, and last night I realized how "lazy" I became after writing
 	  python code for about three weeks: forgetting the semicolon, forgetting the curly bracket, and even forgetting parentheses.
       I want to learn Python and other languages with simpler syntax. But I definitely do not want to mess up my familarity with C++.
 	  
-	  - Besides syntax, I also want to dive deeper into the vast feautres and functionalities of C++. I want to master the level of "C with stl" and then go beyond that.
+	  Besides syntax, I also want to dive deeper into the vast feautres and functionalities of C++. I want to master the level of "C with stl" and then go beyond that.
 
    2. I want to get familiar with XCode
 
